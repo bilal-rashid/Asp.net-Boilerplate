@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dairy.Migrations
 {
     [DbContext(typeof(DairyDbContext))]
-    [Migration("20200427212911_Add_Product")]
+    [Migration("20200428231751_Add_Product")]
     partial class Add_Product
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1518,9 +1518,9 @@ namespace Dairy.Migrations
 
             modelBuilder.Entity("Dairy.Dairy.Products.Product", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreationTime")
