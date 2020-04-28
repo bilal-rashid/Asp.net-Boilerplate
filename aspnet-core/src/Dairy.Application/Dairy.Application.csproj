@@ -13,4 +13,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Dairy.Core\Dairy.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dairy\" />
+    <Folder Include="Dairy\Products\" />
+    <Folder Include="Dairy\Products\Dto\" />
+  </ItemGroup>
 </Project>

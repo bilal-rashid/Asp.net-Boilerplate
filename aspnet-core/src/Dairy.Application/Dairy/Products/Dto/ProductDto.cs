@@ -1,11 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using Abp.Domain.Entities.Auditing;
+using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
 
-namespace Dairy.Dairy.Products
+namespace Dairy.Dairy.Products.Dto
 {
-    [Table("Dairy_Product")]
-    public class Product : FullAuditedEntity<int>
+    [AutoMap(typeof(Product))]
+    public class ProductDto: EntityDto<int>
     {
         public string Name { get; set; }
         public string Description { get; set; }
