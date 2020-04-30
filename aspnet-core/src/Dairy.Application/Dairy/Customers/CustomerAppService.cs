@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Linq;
 using Abp.Application.Services;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
+using Dairy.Authorization;
 using Dairy.Dairy.Customers.Dto;
 
 namespace Dairy.Dairy.Customers
 {
+    [AbpAuthorize(PermissionNames.Pages_Customers)]
     public class CustomerAppService : AsyncCrudAppService<Customer, CustomerDto,int, GetAllCustomersInputDto>
     {
       

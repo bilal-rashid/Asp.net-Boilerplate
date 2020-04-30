@@ -105,5 +105,16 @@
     <text name="RoleDeleteWarningMessage">Role {0} will be deleted and unassigned from all assigned users.</text>
     <text name="TenantDeleteWarningMessage">Tenant {0} will be deleted.</text>
     <text name="SearchWithThreeDot">Search...</text>
+
+    <text name="Products">Products</text>
+    <text name="CreateNewProduct">Create new product</text>
+    <text name="UpdateProduct">Update product</text>
+    <text name="DeleteProduct">Delete product</text>
+
+    <text name="Customers">Customers</text>
+    <text name="CreateNewCustomer">Create new customer</text>
+    <text name="UpdateCustomer">Update customer</text>
+    <text name="DeleteCustomer">Delete customer</text>
+
   </texts>
 </localizationDictionary>
