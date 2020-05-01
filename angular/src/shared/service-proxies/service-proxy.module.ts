@@ -10,6 +10,8 @@ import * as ApiServiceProxies from './service-proxies';
         ApiServiceProxies.SessionServiceProxy,
         ApiServiceProxies.TenantServiceProxy,
         ApiServiceProxies.UserServiceProxy,
+        ApiServiceProxies.ProductServiceProxy,
+        ApiServiceProxies.CustomerServiceProxy,
         ApiServiceProxies.TokenAuthServiceProxy,
         ApiServiceProxies.AccountServiceProxy,
         ApiServiceProxies.ConfigurationServiceProxy,
