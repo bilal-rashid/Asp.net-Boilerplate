@@ -2,7 +2,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card main-content">
             <div class="header">
-                <h2>{{ "Products" | localize }}</h2>
+                <h2>{{ "Customers" | localize }}</h2>
                 <ul class="header-dropdown m-r--5">
                     <li>
                         <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
@@ -37,15 +37,16 @@
                     <thead>
                     <tr>
                         <th>{{ "NameLabel" | localize }}</th>
-                        <th>{{ "PriceLabel" | localize }} (PKR)</th>
-                        <th>{{ "QtyLable" | localize }}</th>
-                        <th>{{ "UnitLabel" | localize }}</th>
+                        <th>{{ "PrimaryContact" | localize }}</th>
+                        <th>
+                            <div style="text-align:center">{{ "Temporary" | localize }}</div>
+                        </th>
                         <th>{{ "Actions" | localize }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="
-                let product of (products
+                let customer of (customers
                   | paginate
                     : {
                         id: 'server',
@@ -54,20 +55,26 @@
                         totalItems: totalItems
                       })
               ">
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.price }}</td>
-                        <td>{{ product.quantity }}</td>
-                        <td>{{ product.unit }}</td>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.primaryContact }}</td>
+                        <td align="center">
+                            <i class="material-icons check_box" *ngIf="customer.isTemporary">
+                                check_box
+                            </i>
+                            <i class="material-icons indeterminate_check_box" *ngIf="!customer.isTemporary">
+                                indeterminate_check_box
+                            </i>
+                        </td>
                         <td>
                             <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
                                 <mat-icon>menu</mat-icon>
                             </button>
                             <mat-menu #actionsMenu="matMenu">
-                                <button mat-menu-item (click)="editProduct(product)">
+                                <button mat-menu-item (click)="editCustomer(customer)">
                                     <mat-icon>edit</mat-icon>
                                     <span>{{ "Edit" | localize }}</span>
                                 </button>
-                                <button mat-menu-item (click)="delete(product)">
+                                <button mat-menu-item (click)="delete(customer)">
                                     <mat-icon>delete</mat-icon>
                                     <span>{{ "Delete" | localize }}</span>
                                 </button>
@@ -80,7 +87,7 @@
                     <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
                     </abp-pagination-controls>
                 </div>
-                <button mat-mini-fab color="primary" class="pull-right" (click)="createProduct()">
+                <button mat-mini-fab color="primary" class="pull-right" (click)="createCustomer()">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>

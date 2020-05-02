@@ -40,6 +40,9 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
 import { ProductComponent } from './product/product.component';
 import { CreateProductDialogComponent } from './product/create-product-dialog/create-product-dialog.component';
 import { EditProductDialogComponent } from './product/edit-product-dialog/edit-product-dialog.component';
+import { CustomerComponent } from './customer/customer.component';
+import { CreateCustomerDialogComponent } from './customer/create-customer-dialog/create-customer-dialog.component';
+import { EditCustomerDialogComponent } from './customer/edit-customer-dialog/edit-customer-dialog.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +71,10 @@ import { EditProductDialogComponent } from './product/edit-product-dialog/edit-p
     ResetPasswordDialogComponent,
     ProductComponent,
     CreateProductDialogComponent,
-    EditProductDialogComponent
+    EditProductDialogComponent,
+    CustomerComponent,
+    CreateCustomerDialogComponent,
+    EditCustomerDialogComponent
   ],
   imports: [
     CommonModule,
@@ -94,6 +100,9 @@ import { EditProductDialogComponent } from './product/edit-product-dialog/edit-p
     // products
     CreateProductDialogComponent,
     EditProductDialogComponent,
+    // customers
+    CreateCustomerDialogComponent,
+    EditCustomerDialogComponent,
     // users
     CreateUserDialogComponent,
     EditUserDialogComponent,
