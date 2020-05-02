@@ -23,5 +23,6 @@
     <Folder Include="Dairy\" />
     <Folder Include="Dairy\Products\" />
     <Folder Include="Dairy\Customers\" />
+    <Folder Include="Dairy\Orders\" />
   </ItemGroup>
 </Project>

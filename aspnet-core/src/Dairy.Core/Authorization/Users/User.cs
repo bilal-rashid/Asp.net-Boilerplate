@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Abp.Authorization.Users;
 using Abp.Extensions;
+using Dairy.Dairy.Orders;
 
 namespace Dairy.Authorization.Users
 {
@@ -30,5 +31,6 @@ namespace Dairy.Authorization.Users
 
             return user;
         }
+        public ICollection<Order> Orders { get; set; }
     }
 }
