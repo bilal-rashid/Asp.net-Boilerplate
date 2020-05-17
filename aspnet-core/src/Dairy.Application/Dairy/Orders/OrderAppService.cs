@@ -12,9 +12,12 @@ using Dairy.Dairy.Products.Dto;
 using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Abp.Authorization;
+using Dairy.Authorization;
 
 namespace Dairy.Dairy.Orders
 {
+    [AbpAuthorize(PermissionNames.Pages_Orders)]
     public class OrderAppService : DairyAppServiceBase, IOrderAppService
     {
         private readonly IRepository<Order, long> _orderRepository;

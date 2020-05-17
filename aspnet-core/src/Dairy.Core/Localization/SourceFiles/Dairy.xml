@@ -124,6 +124,9 @@
     <text name="Temporary">Temporary</text>
     <text name="Address">Address</text>
     <text name="PrimaryContact">Primary Contact</text>
+        
+    <text name="Orders">Orders</text>
+    <text name="CreateOrder">Create new Order</text>
 
   </texts>
 </localizationDictionary>
