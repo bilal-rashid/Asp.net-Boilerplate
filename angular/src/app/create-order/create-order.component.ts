@@ -102,6 +102,17 @@ export class CreateOrderComponent extends PagedListingComponentBase<ProductDto> 
             }
         );
     }
+    confirmAndCreate(): void {
+        abp.message.confirm(
+            'Create order for Customer: ' + this.customers.find( p => p.id === this.customerId).name,
+            undefined,
+            (result: boolean) => {
+                if (result) {
+                    this.createOrder();
+                }
+            }
+        );
+    }
     createOrder(): void {
         const orderDto: CreateOrEditOrderDto = new CreateOrEditOrderDto();
         let totalPrice = 0;
@@ -122,8 +133,13 @@ export class CreateOrderComponent extends PagedListingComponentBase<ProductDto> 
                 })
             )
             .subscribe(() => {
-                this.notify.info(this.l('SavedSuccessfully'));
+                // this.notify.info(this.l('SavedSuccessfully'));
+                abp.notify.success(this.l('SavedSuccessfully'));
+                this.refresh();
             });
+    }
+    isCartEmpty(): boolean {
+        return this.products.filter(p => p.quantity > 0).length === 0;
     }
     add (product): void {
         product.quantity++;
