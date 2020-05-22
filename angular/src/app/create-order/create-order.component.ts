@@ -122,6 +122,7 @@ export class CreateOrderComponent extends PagedListingComponentBase<ProductDto> 
         for (let i = 0; i < orderDto.products.length; i++) {
             totalPrice = totalPrice + (orderDto.products[i].quantity * orderDto.products[i].price);
             orderDto.products[i].quantity = orderDto.products[i].quantity.valueOf();
+            orderDto.products[i].price = orderDto.products[i].quantity * orderDto.products[i].price;
         }
         orderDto.totalPrice = totalPrice;
         orderDto.orderItems = JSON.stringify(orderDto.products);
