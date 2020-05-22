@@ -92,7 +92,7 @@ namespace Dairy.Dairy.Orders
                                 }
                                                               
                             };
-            var totalCount = await pagedOrders.CountAsync();
+            var totalCount = await orders.CountAsync();
             return new PagedResultDto<GetOrderForViewDto>(
                 totalCount,
                 await pagedResult.ToListAsync()
