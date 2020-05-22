@@ -67,7 +67,7 @@
               ">
                         <td>{{ product.name }}</td>
                         <td>{{ product.price }}</td>
-                        <td>{{ product['quantity1'] }}</td>
+                        <td>{{ product['quantity1'] | number:  '1.2-2'}}</td>
                         <td>{{ product.unit }}</td>
                         <td>
                             <div class="row">
