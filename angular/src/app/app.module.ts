@@ -44,6 +44,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { CreateCustomerDialogComponent } from './customer/create-customer-dialog/create-customer-dialog.component';
 import { EditCustomerDialogComponent } from './customer/edit-customer-dialog/edit-customer-dialog.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
+import { AllOrdersComponent } from './all-orders/all-orders.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { CreateOrderComponent } from './create-order/create-order.component';
     CustomerComponent,
     CreateCustomerDialogComponent,
     EditCustomerDialogComponent,
-    CreateOrderComponent
+    CreateOrderComponent,
+    AllOrdersComponent
   ],
   imports: [
     CommonModule,
