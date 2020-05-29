@@ -37,6 +37,9 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
         private _dialog: MatDialog
     ) {
         super(injector);
+        const date = new Date();
+        this.startDate = new Date(date.getFullYear(), date.getMonth(), 1);
+        this.endDate = new Date();
     }
 
     list(
