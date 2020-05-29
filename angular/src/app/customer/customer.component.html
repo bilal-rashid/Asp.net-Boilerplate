@@ -78,6 +78,10 @@
                                     <mat-icon>delete</mat-icon>
                                     <span>{{ "Delete" | localize }}</span>
                                 </button>
+                                <button mat-menu-item (click)="goToOrders(customer.id)">
+                                    <mat-icon>list</mat-icon>
+                                    <span>{{ "Orders" | localize }}</span>
+                                </button>
                             </mat-menu>
                         </td>
                     </tr>

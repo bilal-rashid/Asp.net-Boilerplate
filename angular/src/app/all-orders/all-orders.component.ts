@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PagedListingComponentBase, PagedRequestDto} from '@shared/paged-listing-component-base';
 import {appModuleAnimation} from '@shared/animations/routerTransition';
 import {
@@ -10,6 +10,7 @@ import {Injector} from '@node_modules/@angular/core';
 import {MatDialog} from '@node_modules/@angular/material';
 import {finalize} from '@node_modules/rxjs/operators';
 import * as moment from '@node_modules/moment';
+import {ActivatedRoute} from '@node_modules/@angular/router';
 class GetOrdersRequestDto extends PagedRequestDto {
     keyword: string;
     sorting: string;
@@ -37,6 +38,7 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
         private _orderService: OrderServiceProxy,
         private _customerService: CustomerServiceProxy,
         private _userService: UserServiceProxy,
+        private route: ActivatedRoute,
         private _dialog: MatDialog
     ) {
         super(injector);
@@ -54,24 +56,36 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
         request.keyword = this.keyword;
         console.log(moment(this.startDate).startOf('day'));
         console.log(moment(this.endDate).endOf('day'));
-
-        this._orderService
-            .getAll(this.customerId, this.userId, (this.startDate) ? moment(this.startDate).startOf('day').utc(true) : undefined,
-                 (this.startDate) ? moment(this.endDate).endOf('day').utc(true) : undefined, request.sorting, request.skipCount, request.maxResultCount)
-            .pipe(
-                finalize(() => {
-                    finishedCallback();
-                })
-            )
-            .subscribe((result: GetOrderForViewDtoPagedResultDto) => {
-                this.orders = result.items.reverse();
-                console.log(this.orders);
-                this.orders.forEach(o => {
-                    o['expanded'] = false;
-                    o['lineItems'] = JSON.parse(o.order.orderItems);
-                });
-                console.log(this.orders);
-                this.showPaging(result, pageNumber);
+        this.route
+            .queryParams
+            .subscribe(params => {
+                // Defaults to 0 if no query param provided.
+                console.log(params);
+                if (params.customer) {
+                    this.customerId = parseInt(params.customer, 10);
+                }
+                if (params.user) {
+                    this.userId = parseInt(params.user, 10);
+                }
+                console.log(this.customerId);
+                this._orderService
+                    .getAll(this.customerId, this.userId, (this.startDate) ? moment(this.startDate).startOf('day').utc(true) : undefined,
+                        (this.startDate) ? moment(this.endDate).endOf('day').utc(true) : undefined, request.sorting, request.skipCount, request.maxResultCount)
+                    .pipe(
+                        finalize(() => {
+                            finishedCallback();
+                        })
+                    )
+                    .subscribe((result: GetOrderForViewDtoPagedResultDto) => {
+                        this.orders = result.items.reverse();
+                        console.log(this.orders);
+                        this.orders.forEach(o => {
+                            o['expanded'] = false;
+                            o['lineItems'] = JSON.parse(o.order.orderItems);
+                        });
+                        console.log(this.orders);
+                        this.showPaging(result, pageNumber);
+                    });
             });
         this._customerService
             .getAll('', request.sorting, request.skipCount, 2000)

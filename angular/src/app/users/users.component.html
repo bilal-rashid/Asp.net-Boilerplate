@@ -94,6 +94,10 @@
                                         <mat-icon>lock</mat-icon>
                                         <span>{{ "ResetPassword" | localize }}</span>
                                     </button>
+                                    <button mat-menu-item (click)="goToOrders(user.id)">
+                                        <mat-icon>list</mat-icon>
+                                        <span>{{ "Orders" | localize }}</span>
+                                    </button>
                                 </mat-menu>
                             </td>
                         </tr>
