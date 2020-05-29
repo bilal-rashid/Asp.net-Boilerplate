@@ -38,11 +38,23 @@
                                     <mat-datepicker #edp></mat-datepicker>
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <mat-form-field>
                                     <mat-select [placeholder]="l('Customer')" [(ngModel)]="customerId"  name="isActive">
                                         <mat-option *ngFor="let customer of customers"
                                                     [value]="customer.id">{{customer.name}}</mat-option>
+
+                                        <!--   <mat-option value="">{{ 'All' | localize }}</mat-option>
+                                           <mat-option value="true">{{ 'Yes' | localize }}</mat-option>
+                                           <mat-option value="false">{{ 'No' | localize }}</mat-option>-->
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-select [placeholder]="l('User')" [(ngModel)]="userId"  name="userD">
+                                        <mat-option *ngFor="let user of users"
+                                                    [value]="user.id">{{user.fullName}}</mat-option>
 
                                         <!--   <mat-option value="">{{ 'All' | localize }}</mat-option>
                                            <mat-option value="true">{{ 'Yes' | localize }}</mat-option>

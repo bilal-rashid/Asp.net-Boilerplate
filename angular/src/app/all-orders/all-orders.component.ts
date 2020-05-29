@@ -4,7 +4,7 @@ import {appModuleAnimation} from '@shared/animations/routerTransition';
 import {
     CustomerDto, CustomerDtoPagedResultDto, CustomerServiceProxy,
     GetOrderForViewDto, GetOrderForViewDtoPagedResultDto, IProductDto,
-    OrderServiceProxy
+    OrderServiceProxy, UserDto, UserDtoPagedResultDto, UserServiceProxy
 } from '@shared/service-proxies/service-proxies';
 import {Injector} from '@node_modules/@angular/core';
 import {MatDialog} from '@node_modules/@angular/material';
@@ -24,6 +24,8 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
 
     customers: CustomerDto[] = [];
     customerId: any;
+    users: UserDto[] = [];
+    userId: any;
     orders: GetOrderForViewDto[] = [];
     startDate: Date;
     endDate: Date;
@@ -34,6 +36,7 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
         injector: Injector,
         private _orderService: OrderServiceProxy,
         private _customerService: CustomerServiceProxy,
+        private _userService: UserServiceProxy,
         private _dialog: MatDialog
     ) {
         super(injector);
@@ -53,7 +56,7 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
         console.log(moment(this.endDate).endOf('day'));
 
         this._orderService
-            .getAll(this.customerId, undefined, (this.startDate) ? moment(this.startDate).startOf('day').utc(true) : undefined,
+            .getAll(this.customerId, this.userId, (this.startDate) ? moment(this.startDate).startOf('day').utc(true) : undefined,
                  (this.startDate) ? moment(this.endDate).endOf('day').utc(true) : undefined, request.sorting, request.skipCount, request.maxResultCount)
             .pipe(
                 finalize(() => {
@@ -80,9 +83,20 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
             .subscribe((result: CustomerDtoPagedResultDto) => {
                 this.customers = result.items;
             });
+        this._userService
+            .getAll('', true, request.skipCount, 500)
+            .pipe(
+                finalize(() => {
+                    // finishedCallback();
+                })
+            )
+            .subscribe((result: UserDtoPagedResultDto) => {
+                this.users = result.items;
+            });
     }
     public clearFilter(): void {
         this.customerId = undefined;
+        this.userId = undefined;
         this.startDate = undefined;
         this.endDate = undefined;
     }
