@@ -73,7 +73,7 @@ export class CreateOrderComponent extends PagedListingComponentBase<ProductDto> 
                 this.showPaging(result, pageNumber);
             });
         this._customerService
-            .getAll('', request.sorting, request.skipCount, 100)
+            .getAll('', request.sorting, request.skipCount, 2000)
             .pipe(
                 finalize(() => {
                     // finishedCallback();

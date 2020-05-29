@@ -21,12 +21,37 @@
                 <!--query start-->
                 <div class="row clearfix">
                     <form>
-                        <mat-form-field>
-                            <input matInput [placeholder]="l('Filter')" [(ngModel)]="keyword" name="keyword">
-                        </mat-form-field>
+                        <div class="row" style="padding: 15px">
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>Start Date</mat-label>
+                                    <input matInput [ngModelOptions]="{standalone: true}" [matDatepicker]="sdp" [(ngModel)]="startDate">
+                                    <mat-datepicker-toggle matSuffix [for]="sdp"></mat-datepicker-toggle>
+                                    <mat-datepicker #sdp></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field>
+                                    <mat-label>End Date</mat-label>
+                                    <input matInput [ngModelOptions]="{standalone: true}" [matDatepicker]="edp" [(ngModel)]="endDate">
+                                    <mat-datepicker-toggle matSuffix [for]="edp"></mat-datepicker-toggle>
+                                    <mat-datepicker #edp></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <mat-select [placeholder]="l('Customer')" [(ngModel)]="customerId"  name="isActive">
+                                        <mat-option *ngFor="let customer of customers"
+                                                    [value]="customer.id">{{customer.name}}</mat-option>
 
-                        <div class="row">
+                                        <!--   <mat-option value="">{{ 'All' | localize }}</mat-option>
+                                           <mat-option value="true">{{ 'Yes' | localize }}</mat-option>
+                                           <mat-option value="false">{{ 'No' | localize }}</mat-option>-->
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
                             <div class="col-md-12 text-right p-r-25">
+                                <button style="margin-right: 10px" mat-raised-button color="warn" (click)="clearFilter()">{{ 'Clear' | localize }}</button>
                                 <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
                             </div>
                         </div>
@@ -58,7 +83,7 @@
                         <tr>
                             <td>{{ order.order.customerName }}</td>
                             <td>{{ order.order.creationTime | date}}</td>
-                            <td>{{ order.order.totalPrice }}</td>
+                            <td>{{ order.order.totalPrice.toString().replace('/\B(?=(\d{3})+(?!\d))/g', ",") }}</td>
                             <td>
                                 <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
                                     <mat-icon>menu</mat-icon>
