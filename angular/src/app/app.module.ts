@@ -45,6 +45,7 @@ import { CreateCustomerDialogComponent } from './customer/create-customer-dialog
 import { EditCustomerDialogComponent } from './customer/edit-customer-dialog/edit-customer-dialog.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
+import {CustomerBillDialogComponent} from '@app/all-orders/customer-bill/customer-bill-dialog.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { AllOrdersComponent } from './all-orders/all-orders.component';
     CustomerComponent,
     CreateCustomerDialogComponent,
     EditCustomerDialogComponent,
+    CustomerBillDialogComponent,
     CreateOrderComponent,
     AllOrdersComponent
   ],
@@ -107,6 +109,8 @@ import { AllOrdersComponent } from './all-orders/all-orders.component';
     // customers
     CreateCustomerDialogComponent,
     EditCustomerDialogComponent,
+    // bill
+    CustomerBillDialogComponent,
     // users
     CreateUserDialogComponent,
     EditUserDialogComponent,

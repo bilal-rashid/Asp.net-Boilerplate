@@ -11,6 +11,9 @@ import {MatDialog} from '@node_modules/@angular/material';
 import {finalize} from '@node_modules/rxjs/operators';
 import * as moment from '@node_modules/moment';
 import {ActivatedRoute} from '@node_modules/@angular/router';
+import {CreateCustomerDialogComponent} from '@app/customer/create-customer-dialog/create-customer-dialog.component';
+import {EditCustomerDialogComponent} from '@app/customer/edit-customer-dialog/edit-customer-dialog.component';
+import {CustomerBillDialogComponent} from '@app/all-orders/customer-bill/customer-bill-dialog.component';
 class GetOrdersRequestDto extends PagedRequestDto {
     keyword: string;
     sorting: string;
@@ -67,7 +70,6 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
                 if (params.user) {
                     this.userId = parseInt(params.user, 10);
                 }
-                console.log(this.customerId);
                 this._orderService
                     .getAll(this.customerId, this.userId, (this.startDate) ? moment(this.startDate).startOf('day').utc(true) : undefined,
                         (this.startDate) ? moment(this.endDate).endOf('day').utc(true) : undefined, request.sorting, request.skipCount, request.maxResultCount)
@@ -113,6 +115,30 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
         this.userId = undefined;
         this.startDate = undefined;
         this.endDate = undefined;
+    }
+    getCustomerBill() {
+        this._orderService
+            .getAll(this.customerId, this.userId, (this.startDate) ? moment(this.startDate).startOf('day').utc(true) : undefined,
+                (this.startDate) ? moment(this.endDate).endOf('day').utc(true) : undefined, undefined, 0, 5000)
+            .pipe(
+                finalize(() => {
+                })
+            )
+            .subscribe((result: GetOrderForViewDtoPagedResultDto) => {
+                const orders = result.items.reverse();
+                orders.forEach(o => {
+                    o['lineItems'] = JSON.parse(o.order.orderItems);
+                });
+                this.showBillDialog(orders);
+            });
+    }
+    showBillDialog(orders?: GetOrderForViewDto[]): void {
+        let billDialog;
+        billDialog = this._dialog.open(CustomerBillDialogComponent, {
+            data: {orders: orders,
+            startDate: this.startDate,
+            endDate: this.endDate}
+        });
     }
     delete(order: GetOrderForViewDto): void {
         abp.message.confirm(

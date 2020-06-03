@@ -64,7 +64,8 @@
                             </div>
                             <div class="col-md-12 text-right p-r-25">
                                 <button style="margin-right: 10px" mat-raised-button color="warn" (click)="clearFilter()">{{ 'Clear' | localize }}</button>
-                                <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
+                                <button style="margin-right: 10px" mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
+                                <button *ngIf="customerId && startDate && endDate" mat-raised-button color="primary" (click)="getCustomerBill()">{{ 'Bill' | localize }}</button>
                             </div>
                         </div>
                     </form>

@@ -1,0 +1,49 @@
+<div style="width: 100%">
+    <span style="font-size: 20px; color: #6c6d6d;">Customer Name:  </span> <span style="font-size: 20px;">{{customerName}}</span><br/>
+    <span style="font-size: 20px; color: #6c6d6d;"> Time Period:  </span> <span style="font-size: 20px;"> {{startDate| date}} to {{endDate|date}} </span>
+    <br/>
+    <input style="margin-top: 10px;" type="button" value="Download PDF" class="btn btn-success" (click)="generarPDF()">
+    <br/><br/>
+    <div style="border: 1px solid;overflow-y:auto; overflow-x:hidden; height:600px;text-align: center;width: 800px;" id="content" #content>
+        <h1 style="color: #00b0e4">BALAI FARMS</h1>
+        <h4>100% Pure Milk</h4>
+        <h3>Ali Irfan</h3>
+        <h3>G-9/3</h3>
+        <div class="row" style="border: 1px solid;">
+            <div style="background: #00b0e4;border-right: 1px solid" class="col-lg-2">Date</div>
+            <div style="background: #00b0e4;border-right: 1px solid" class="col-lg-4">Product</div>
+            <div style="background: #00b0e4;border-right: 1px solid" class="col-lg-2">Quantity</div>
+            <div style="background: #00b0e4;border-right: 1px solid" class="col-lg-2">Rate</div>
+            <div style="background: #00b0e4;border-right: 1px solid" class="col-lg-2">Total in Rs</div>
+        </div>
+        <div style="border-bottom: 1px solid" *ngFor="let order of Data" class="row">
+            <div style="border-right: 1px solid" class="col-lg-2">{{order.date | date}}</div>
+            <div style="border-right: 1px solid" class="col-lg-4">{{order.product}}</div>
+            <div style="border-right: 1px solid" class="col-lg-2">{{order.quantity + ' ' + order.unit}}</div>
+            <div style="border-right: 1px solid" class="col-lg-2">{{order.rate}}</div>
+            <div class="col-lg-2">{{order.totalPrice}}</div>
+        </div>
+        <div style="border-bottom: 1px solid" class="row" >
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4"></div>
+            <div style="border-right: 1px solid;" class="col-lg-2">{{' ' + ''}}</div>
+            <div style="background: #00b0e4;border-right: 1px solid;" class="col-lg-2">Grand Total</div>
+            <div style="background: #00b0e4;border-right: 1px solid" class="col-lg-2">{{totalBill}}</div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="row" >
+            <div class="col-lg-1"></div>
+            <div style="border-top: 1px solid;" class="col-lg-2">Date</div>
+            <div class="col-lg-4"></div>
+            <div style="border-top: 1px solid;" class="col-lg-3">Received</div>
+            <div class="col-lg-1"></div>
+        </div>
+        <br/>
+        <br/>
+        <h5>If you require any further information, feel free to contact us.</h5>
+        <h5>03040516151, 03215022504</h5>
+    </div>
+</div>
