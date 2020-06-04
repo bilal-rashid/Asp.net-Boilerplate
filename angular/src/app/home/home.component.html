@@ -37,15 +37,15 @@
                     <i class="material-icons">add_circle</i>
                 </div>
                 <div class="content">
-                    <div class="text">{{product.name}}</div>
-                    <div class="number count-to">
-                        {{ product['quantity1'] | number:  '1.2-2'}}{{'  ' + product.unit}}
+                    <div class="text">{{ product['quantity1'] | number:  '1.2-2'}}{{'  ' + product.unit}}</div>
+                    <div style="font-size: 18px" class="number count-to">
+                        {{product.name}}
                     </div>
 
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div style="margin-bottom: 20px" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <button style="font-size: large" [disabled]="!customerId || isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate()">Submit</button>
         </div>
     </div>
