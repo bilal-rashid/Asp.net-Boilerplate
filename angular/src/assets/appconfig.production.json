@@ -1,6 +1,6 @@
 {
-  "remoteServiceBaseUrl": "http://localhost:21021",
-  "appBaseUrl": "http://localhost:4200",
+  "remoteServiceBaseUrl": "https://dairy.azurewebsites.net",
+  "appBaseUrl": "https://dairysoftware.azurewebsites.net",
   "localeMappings": [
     {
       "from": "pt-BR",
