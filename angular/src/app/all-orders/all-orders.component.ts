@@ -125,11 +125,15 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
                 })
             )
             .subscribe((result: GetOrderForViewDtoPagedResultDto) => {
-                const orders = result.items.reverse();
+                const orders = result.items;
                 orders.forEach(o => {
                     o['lineItems'] = JSON.parse(o.order.orderItems);
                 });
-                this.showBillDialog(orders);
+                if (result.items.length === 0) {
+                    this.notify.info('No orders in selected period');
+                } else {
+                    this.showBillDialog(orders);
+                }
             });
     }
     showBillDialog(orders?: GetOrderForViewDto[]): void {

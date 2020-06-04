@@ -105,7 +105,8 @@ export class CustomerBillDialogComponent extends AppComponentBase
 
             return doc;
         }).then((doc) => {
-            doc.save('postres.pdf');
+            doc.save(this.customerName + ' - ' + this.startDate.toLocaleDateString() +
+                ' to ' + this.endDate.toLocaleDateString() + '.pdf');
             document.getElementById("content").style.height = '600px';
         });
     }
