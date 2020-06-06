@@ -14,51 +14,57 @@
         </div>
         <div role="tabpanel" class="tab-pane fade" id="settings">
             <div class="demo-settings">
-                <p>GENERAL SETTINGS</p>
+                <p>Brand Name</p>
                 <ul class="setting-list">
                     <li>
-                        <span>Report Panel Usage</span>
-                        <div class="switch">
-                            <label><input type="checkbox" checked><span class="lever"></span></label>
-                        </div>
-                    </li>
-                    <li>
-                        <span>Email Redirect</span>
-                        <div class="switch">
-                            <label><input type="checkbox"><span class="lever"></span></label>
-                        </div>
+                        <input style="width: 100%;" type="text" [(ngModel)]="brandName">
                     </li>
                 </ul>
-                <p>SYSTEM SETTINGS</p>
+                <p>Tag line</p>
                 <ul class="setting-list">
                     <li>
-                        <span>Notifications</span>
-                        <div class="switch">
-                            <label><input type="checkbox" checked><span class="lever"></span></label>
-                        </div>
-                    </li>
-                    <li>
-                        <span>Auto Updates</span>
-                        <div class="switch">
-                            <label><input type="checkbox" checked><span class="lever"></span></label>
-                        </div>
+                        <textarea style="width: 100%;" type="text" [(ngModel)]="tagline"></textarea>
                     </li>
                 </ul>
-                <p>ACCOUNT SETTINGS</p>
+                <p>Footer</p>
                 <ul class="setting-list">
                     <li>
-                        <span>Offline</span>
-                        <div class="switch">
-                            <label><input type="checkbox"><span class="lever"></span></label>
-                        </div>
-                    </li>
-                    <li>
-                        <span>Location Permission</span>
-                        <div class="switch">
-                            <label><input type="checkbox" checked><span class="lever"></span></label>
-                        </div>
+                        <textarea style="width: 100%;" type="text" [(ngModel)]="footer"></textarea>
                     </li>
                 </ul>
+                <ul style="text-align: center" class="setting-list">
+                    <button mat-raised-button color="primary" (click)="saveSettings()">{{ 'Save' | localize }}</button>
+                </ul>
+<!--                <p>SYSTEM SETTINGS</p>-->
+<!--                <ul class="setting-list">-->
+<!--                    <li>-->
+<!--                        <span>Notifications</span>-->
+<!--                        <div class="switch">-->
+<!--                            <label><input type="checkbox" checked><span class="lever"></span></label>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <span>Auto Updates</span>-->
+<!--                        <div class="switch">-->
+<!--                            <label><input type="checkbox" checked><span class="lever"></span></label>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <p>ACCOUNT SETTINGS</p>-->
+<!--                <ul class="setting-list">-->
+<!--                    <li>-->
+<!--                        <span>Offline</span>-->
+<!--                        <div class="switch">-->
+<!--                            <label><input type="checkbox"><span class="lever"></span></label>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <span>Location Permission</span>-->
+<!--                        <div class="switch">-->
+<!--                            <label><input type="checkbox" checked><span class="lever"></span></label>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                </ul>-->
             </div>
         </div>
     </div>
