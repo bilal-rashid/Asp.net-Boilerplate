@@ -4,14 +4,16 @@ using Dairy.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dairy.Migrations
 {
     [DbContext(typeof(DairyDbContext))]
-    partial class DairyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200606165530_Remove_extra_column")]
+    partial class Remove_extra_column
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
