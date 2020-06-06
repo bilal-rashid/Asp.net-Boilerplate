@@ -13,4 +13,13 @@
   <ItemGroup>
     <ProjectReference Include="..\Dairy.Core\Dairy.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dairy\" />
+    <Folder Include="Dairy\Customers\" />
+    <Folder Include="Dairy\Products\" />
+    <Folder Include="Dairy\Orders\" />
+    <Folder Include="Dairy\Products\Dto\" />
+    <Folder Include="Dairy\Customers\Dto\" />
+    <Folder Include="Dairy\Orders\Dto\" />
+  </ItemGroup>
 </Project>

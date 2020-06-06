@@ -102,8 +102,31 @@
     <text name="PasswordsDoNotMatch">Passwords do not match</text>
     <text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber">Passwords must be at least 8 characters, contain a lowercase, uppercase, and number</text>
     <text name="UserDeleteWarningMessage">User {0} will be deleted.</text>
+    <text name="DeleteWarningMessage">{0} will be deleted.</text>
     <text name="RoleDeleteWarningMessage">Role {0} will be deleted and unassigned from all assigned users.</text>
     <text name="TenantDeleteWarningMessage">Tenant {0} will be deleted.</text>
     <text name="SearchWithThreeDot">Search...</text>
+
+    <text name="Products">Products</text>
+    <text name="CreateNewProduct">Create new product</text>
+    <text name="UpdateProduct">Update product</text>
+    <text name="DeleteProduct">Delete product</text>
+    <text name="NameLabel">Name</text>
+    <text name="QtyLable">Quantity</text>
+    <text name="PriceLabel">Price</text>
+    <text name="DescriptionLabel">Description</text>
+    <text name="UnitLabel">Unit</text>
+
+    <text name="Customers">Customers</text>
+    <text name="CreateNewCustomer">Create new customer</text>
+    <text name="UpdateCustomer">Update customer</text>
+    <text name="DeleteCustomer">Delete customer</text>
+    <text name="Temporary">Temporary</text>
+    <text name="Address">Address</text>
+    <text name="PrimaryContact">Primary Contact</text>
+        
+    <text name="Orders">Orders</text>
+    <text name="CreateOrder">Create new Order</text>
+
   </texts>
 </localizationDictionary>

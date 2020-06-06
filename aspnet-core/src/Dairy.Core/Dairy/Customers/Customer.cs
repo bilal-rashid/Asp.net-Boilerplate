@@ -15,7 +15,6 @@ namespace Dairy.Dairy.Customers
         public bool IsTemporary { get; set; }
         public string Address { get; set; }
         public string PrimaryContact { get; set; }
-        public string TenantName { get; set; }
         public int TenantId { get; set; }
         public ICollection<Order> Orders { get; set; }
     }
