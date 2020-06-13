@@ -1,0 +1,69 @@
+<form autocomplete="off" #createProductForm="ngForm" (ngSubmit)="save()">
+    <h1 mat-dialog-title>{{ "UpdateCustomer" | localize }}</h1>
+    <mat-dialog-content style="width:600px;height:300px;">
+        <div class="row-fluid">
+            <div class="col-md-12">
+                <mat-form-field>
+                    <input
+                            matInput
+                            name="Name"
+                            [placeholder]="'Name' | localize"
+                            [(ngModel)]="customer.name"
+                            required
+                            minlength="2"
+                            maxlength="32"
+                    />
+                </mat-form-field>
+                <mat-form-field>
+                    <input
+                            matInput
+                            name="PrimaryContact"
+                            [placeholder]="'PrimaryContact' | localize"
+                            [(ngModel)]="customer.primaryContact"
+                            required
+                            type="text"
+                            minlength="2"
+                    />
+                </mat-form-field>
+                <mat-form-field>
+                    <input
+                            matInput
+                            name="Address"
+                            [placeholder]="'Address' | localize"
+                            [(ngModel)]="customer.address"
+                            required
+                            type="text"
+                            minlength="2"
+                    />
+                </mat-form-field>
+                <mat-form-field>
+                      <textarea
+                              matInput
+                              name="Description"
+                              [placeholder]="'DescriptionLabel' | localize"
+                              [(ngModel)]="customer.description"
+                      ></textarea>
+                </mat-form-field>
+                <div class="checkbox-wrapper">
+                    <mat-checkbox name="Temporary" [(ngModel)]="customer.isTemporary">
+                        {{ "Temporary" | localize }}
+                    </mat-checkbox>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <div mat-dialog-actions align="end">
+        <button mat-button type="button" [disabled]="saving" (click)="close(false)">
+            {{ "Cancel" | localize }}
+        </button>
+        <button
+                mat-flat-button
+                type="submit"
+                flex="15"
+                color="primary"
+                [disabled]="!createProductForm.form.valid || saving"
+        >
+            {{ "Save" | localize }}
+        </button>
+    </div>
+</form>

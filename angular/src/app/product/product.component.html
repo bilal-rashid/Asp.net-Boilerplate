@@ -2,7 +2,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card main-content">
             <div class="header">
-                <h2>{{ "Users" | localize }}</h2>
+                <h2>{{ "Products" | localize }}</h2>
                 <ul class="header-dropdown m-r--5">
                     <li>
                         <button mat-icon-button [matMenuTriggerFor]="headerMenu" class="header-dropdown-mat-icon-button">
@@ -21,21 +21,11 @@
                 <!--query start-->
                 <div class="row clearfix">
                     <form>
+                        <mat-form-field>
+                            <input matInput [placeholder]="l('Filter')" [(ngModel)]="keyword" name="keyword">
+                        </mat-form-field>
+
                         <div class="row">
-                            <div class="col-md-6">
-                                <mat-form-field>
-                                    <input matInput [placeholder]="l('Filter')" [(ngModel)]="keyword" name="keyword">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-md-6">
-                                <mat-form-field>
-                                    <mat-select [placeholder]="l('IsActive')" [(ngModel)]="isActive" name="isActive">
-                                        <mat-option value="">{{ 'All' | localize }}</mat-option>
-                                        <mat-option value="true">{{ 'Yes' | localize }}</mat-option>
-                                        <mat-option value="false">{{ 'No' | localize }}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
                             <div class="col-md-12 text-right p-r-25">
                                 <button mat-raised-button color="primary" (click)="getDataPage(1)">{{ 'Search' | localize }}</button>
                             </div>
@@ -46,18 +36,16 @@
                 <table class="table table-hover table-striped" [busy]="isTableLoading">
                     <thead>
                     <tr>
-                        <th>{{ "UserName" | localize }}</th>
-                        <th>{{ "FullName" | localize }}</th>
-                        <th>{{ "EmailAddress" | localize }}</th>
-                        <th>
-                            <div style="text-align:center">{{ "IsActive" | localize }}</div>
-                        </th>
+                        <th>{{ "NameLabel" | localize }}</th>
+                        <th>{{ "PriceLabel" | localize }} (PKR)</th>
+                        <th>{{ "QtyLable" | localize }}</th>
+                        <th>{{ "UnitLabel" | localize }}</th>
                         <th>{{ "Actions" | localize }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="
-                let user of (users
+                let product of (products
                   | paginate
                     : {
                         id: 'server',
@@ -66,37 +54,22 @@
                         totalItems: totalItems
                       })
               ">
-                        <td>{{ user.userName }}</td>
-                        <td>{{ user.fullName }}</td>
-                        <td>{{ user.emailAddress }}</td>
-                        <td align="center">
-                            <i class="material-icons check_box" *ngIf="user.isActive">
-                                check_box
-                            </i>
-                            <i class="material-icons indeterminate_check_box" *ngIf="!user.isActive">
-                                indeterminate_check_box
-                            </i>
-                        </td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.quantity | number:  '1.2-2'}}</td>
+                        <td>{{ product.unit }}</td>
                         <td>
                             <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
                                 <mat-icon>menu</mat-icon>
                             </button>
                             <mat-menu #actionsMenu="matMenu">
-                                <button mat-menu-item (click)="editUser(user)">
+                                <button mat-menu-item (click)="editProduct(product)">
                                     <mat-icon>edit</mat-icon>
                                     <span>{{ "Edit" | localize }}</span>
                                 </button>
-                                <button mat-menu-item (click)="delete(user)">
+                                <button mat-menu-item (click)="delete(product)">
                                     <mat-icon>delete</mat-icon>
                                     <span>{{ "Delete" | localize }}</span>
-                                </button>
-                                <button mat-menu-item (click)="resetPassword(user)">
-                                    <mat-icon>lock</mat-icon>
-                                    <span>{{ "ResetPassword" | localize }}</span>
-                                </button>
-                                <button mat-menu-item (click)="goToOrders(user.id)">
-                                    <mat-icon>list</mat-icon>
-                                    <span>{{ "Orders" | localize }}</span>
                                 </button>
                             </mat-menu>
                         </td>
@@ -107,7 +80,7 @@
                     <abp-pagination-controls (pageChange)="getDataPage($event)" id="server">
                     </abp-pagination-controls>
                 </div>
-                <button mat-mini-fab color="primary" class="pull-right" (click)="createUser()">
+                <button mat-mini-fab color="primary" class="pull-right" (click)="createProduct()">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>

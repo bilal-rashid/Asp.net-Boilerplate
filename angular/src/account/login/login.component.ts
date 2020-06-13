@@ -29,7 +29,7 @@ export class LoginComponent extends AppComponentBase {
       return false;
     }
 
-    return true;
+    return false;
   }
 
   login(): void {

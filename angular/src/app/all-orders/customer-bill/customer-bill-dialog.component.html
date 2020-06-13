@@ -1,0 +1,48 @@
+<div style="width: 100%">
+    <input style="margin-top: 10px;" type="button" value="Download PDF" class="btn btn-success" (click)="generarPDF()">
+    <br/><br/>
+    <div style="overflow-y:auto; overflow-x:hidden; height:600px;text-align: center;width: 800px;" id="content" #content>
+        <h1>{{brandName}}</h1>
+        <h4 *ngIf="tagline && tagline.length > 10">{{tagline}}</h4>
+        <h5 *ngIf="address && address.length > 2">{{address}}</h5>
+        <b style="font-size: 14px;">Customer Name:  </b> <span style="font-size: 15px;">{{customerName}}</span><br/>
+        <b style="font-size: 14px;"> Time Period:  </b> <span style="font-size: 15px;"> {{startDate| date}} to {{endDate|date}} </span>
+        <div style="padding: 28px">
+            <div class="row" style="border: 1px solid;">
+                <div style="background: #afb2b3;border-right: 1px solid;" class="col-lg-2">Date</div>
+                <div style="background: #afb2b3;border-right: 1px solid;" class="col-lg-4">Product</div>
+                <div style="background: #afb2b3;" class="col-lg-2">Quantity</div>
+                <div style="background: #afb2b3;border-left: 1px solid;" class="col-lg-2">Rate</div>
+                <div style="background: #afb2b3;border-left: 1px solid;" class="col-lg-2">Total in Rs</div>
+            </div>
+            <div style="border-bottom: 1px solid" *ngFor="let order of Data" class="row">
+                <div style="border-right: 1px solid;border-left: 1px solid" class="col-lg-2">{{order.date | date}}</div>
+                <div style="border-right: 1px solid" class="col-lg-4">{{order.product}}</div>
+                <div style="border-right: 1px solid" class="col-lg-2">{{order.quantity + ' ' + order.unit}}</div>
+                <div style="border-right: 1px solid" class="col-lg-2">{{order.rate}}</div>
+                <div style="border-right: 1px solid" class="col-lg-2">{{order.totalPrice}}</div>
+            </div>
+            <div style="border-bottom: 1px solid;border-left: 1px solid;border-right: 1px solid" class="row" >
+                <div class="col-lg-2"></div>
+                <div class="col-lg-4"></div>
+                <div style="border-right: 1px solid;" class="col-lg-2">{{' ' + ''}}</div>
+                <div style="background: #afb2b3;border-left: 1px solid;" class="col-lg-2">Grand Total</div>
+                <div style="background: #afb2b3;border-left: 1px solid;" class="col-lg-2">{{totalBill}}</div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="row" >
+            <div class="col-lg-1"></div>
+            <div style="border-top: 1px solid;" class="col-lg-2">Date</div>
+            <div class="col-lg-6"></div>
+            <div style="border-top: 1px solid;" class="col-lg-2">Received</div>
+            <div class="col-lg-1"></div>
+        </div>
+        <br/>
+        <br/>
+        <h5 *ngIf="footer && footer.length > 10">{{footer}}</h5>
+    </div>
+</div>

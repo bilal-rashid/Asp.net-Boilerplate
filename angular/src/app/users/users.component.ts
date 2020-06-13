@@ -8,6 +8,7 @@ import { CreateUserDialogComponent } from './create-user/create-user-dialog.comp
 import { EditUserDialogComponent } from './edit-user/edit-user-dialog.component';
 import { Moment } from 'moment';
 import { ResetPasswordDialogComponent } from './reset-password/reset-password.component';
+import {Router} from '@node_modules/@angular/router';
 
 class PagedUsersRequestDto extends PagedRequestDto {
     keyword: string;
@@ -18,10 +19,10 @@ class PagedUsersRequestDto extends PagedRequestDto {
     templateUrl: './users.component.html',
     animations: [appModuleAnimation()],
     styles: [
-        `
-          mat-form-field {
-            padding: 10px;
-          }
+            `
+            mat-form-field {
+                padding: 10px;
+            }
         `
     ]
 })
@@ -33,6 +34,7 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
     constructor(
         injector: Injector,
         private _userService: UserServiceProxy,
+        private _router: Router,
         private _dialog: MatDialog
     ) {
         super(injector);
@@ -108,5 +110,8 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
                 this.refresh();
             }
         });
+    }
+    private goToOrders(id) {
+        this._router.navigate(['app/orders'], { queryParams: { user: id } });
     }
 }

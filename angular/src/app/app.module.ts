@@ -37,58 +37,84 @@ import { CreateUserDialogComponent } from '@app/users/create-user/create-user-di
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
+import { ProductComponent } from './product/product.component';
+import { CreateProductDialogComponent } from './product/create-product-dialog/create-product-dialog.component';
+import { EditProductDialogComponent } from './product/edit-product-dialog/edit-product-dialog.component';
+import { CustomerComponent } from './customer/customer.component';
+import { CreateCustomerDialogComponent } from './customer/create-customer-dialog/create-customer-dialog.component';
+import { EditCustomerDialogComponent } from './customer/edit-customer-dialog/edit-customer-dialog.component';
+import { CreateOrderComponent } from './create-order/create-order.component';
+import { AllOrdersComponent } from './all-orders/all-orders.component';
+import {CustomerBillDialogComponent} from '@app/all-orders/customer-bill/customer-bill-dialog.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    AboutComponent,
-    TopBarComponent,
-    TopBarLanguageSwitchComponent,
-    SideBarUserAreaComponent,
-    SideBarNavComponent,
-    SideBarFooterComponent,
-    RightSideBarComponent,
-    // tenants
-    TenantsComponent,
-    CreateTenantDialogComponent,
-    EditTenantDialogComponent,
-    // roles
-    RolesComponent,
-    CreateRoleDialogComponent,
-    EditRoleDialogComponent,
-    // users
-    UsersComponent,
-    CreateUserDialogComponent,
-    EditUserDialogComponent,
-    ChangePasswordComponent,
-    ResetPasswordDialogComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    HttpClientJsonpModule,
-    ModalModule.forRoot(),
-    AbpModule,
-    AppRoutingModule,
-    ServiceProxyModule,
-    SharedModule,
-    NgxPaginationModule
-  ],
-  providers: [],
-  entryComponents: [
-    // tenants
-    CreateTenantDialogComponent,
-    EditTenantDialogComponent,
-    // roles
-    CreateRoleDialogComponent,
-    EditRoleDialogComponent,
-    // users
-    CreateUserDialogComponent,
-    EditUserDialogComponent,
-    ResetPasswordDialogComponent
-  ]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        AboutComponent,
+        TopBarComponent,
+        TopBarLanguageSwitchComponent,
+        SideBarUserAreaComponent,
+        SideBarNavComponent,
+        SideBarFooterComponent,
+        RightSideBarComponent,
+        // tenants
+        TenantsComponent,
+        CreateTenantDialogComponent,
+        EditTenantDialogComponent,
+        // roles
+        RolesComponent,
+        CreateRoleDialogComponent,
+        EditRoleDialogComponent,
+        // users
+        UsersComponent,
+        CreateUserDialogComponent,
+        EditUserDialogComponent,
+        ChangePasswordComponent,
+        ResetPasswordDialogComponent,
+        ProductComponent,
+        CreateProductDialogComponent,
+        EditProductDialogComponent,
+        CustomerComponent,
+        CreateCustomerDialogComponent,
+        EditCustomerDialogComponent,
+        CustomerBillDialogComponent,
+        CreateOrderComponent,
+        AllOrdersComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        HttpClientJsonpModule,
+        ModalModule.forRoot(),
+        AbpModule,
+        AppRoutingModule,
+        ServiceProxyModule,
+        SharedModule,
+        NgxPaginationModule
+    ],
+    providers: [],
+    entryComponents: [
+        // tenants
+        CreateTenantDialogComponent,
+        EditTenantDialogComponent,
+        // roles
+        CreateRoleDialogComponent,
+        EditRoleDialogComponent,
+        // products
+        CreateProductDialogComponent,
+        EditProductDialogComponent,
+        // customers
+        CreateCustomerDialogComponent,
+        EditCustomerDialogComponent,
+        // bill
+        CustomerBillDialogComponent,
+        // users
+        CreateUserDialogComponent,
+        EditUserDialogComponent,
+        ResetPasswordDialogComponent
+    ]
 })
 export class AppModule {}

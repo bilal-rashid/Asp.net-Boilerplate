@@ -6,5 +6,6 @@
         public const string Brand = "App.Tenant.Brand";
         public const string Tagline = "App.Tenant.Tagline";
         public const string Footer = "App.Tenant.Footer";
+        public const string Address = "App.Tenant.Address";
     }
 }

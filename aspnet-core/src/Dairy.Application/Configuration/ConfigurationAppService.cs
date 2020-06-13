@@ -24,5 +24,9 @@ namespace Dairy.Configuration
         {
             await SettingManager.ChangeSettingForTenantAsync((int)AbpSession.TenantId, AppSettingNames.Footer, input);
         }
+        public async Task ChangeAddress(string input)
+        {
+            await SettingManager.ChangeSettingForTenantAsync((int)AbpSession.TenantId, AppSettingNames.Address, input);
+        }
     }
 }
