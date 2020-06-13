@@ -43,6 +43,7 @@ export class RightSideBarComponent extends AppComponentBase implements OnInit {
     brandName: string;
     tagline: string;
     footer: string;
+    address: string;
 
     constructor(
         injector: Injector,
@@ -57,6 +58,7 @@ export class RightSideBarComponent extends AppComponentBase implements OnInit {
         this.brandName = this.setting.get('App.Tenant.Brand');
         this.tagline = this.setting.get('App.Tenant.Tagline');
         this.footer = this.setting.get('App.Tenant.Footer');
+        this.address = this.setting.get('App.Tenant.Address');
     }
 
     setTheme(theme: UiThemeInfo): void {
@@ -80,6 +82,8 @@ export class RightSideBarComponent extends AppComponentBase implements OnInit {
         this._configurationService.changeTagLine(this.tagline).subscribe(() => {
         });
         this._configurationService.changeFooter(this.footer).subscribe(() => {
+        });
+        this._configurationService.changeAddress(this.address).subscribe(() => {
         });
     }
 }
