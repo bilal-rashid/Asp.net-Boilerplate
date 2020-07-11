@@ -6,6 +6,7 @@ using Dairy.MultiTenancy;
 using Dairy.Dairy.Products;
 using Dairy.Dairy.Customers;
 using Dairy.Dairy.Orders;
+using Dairy.Dairy.Routes;
 
 namespace Dairy.EntityFrameworkCore
 {
@@ -15,6 +16,7 @@ namespace Dairy.EntityFrameworkCore
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Route> Routes { get; set; }
 
         public DairyDbContext(DbContextOptions<DairyDbContext> options)
             : base(options)
