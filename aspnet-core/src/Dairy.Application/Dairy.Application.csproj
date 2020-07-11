@@ -21,5 +21,7 @@
     <Folder Include="Dairy\Customers\Dto\" />
     <Folder Include="Dairy\Orders\" />
     <Folder Include="Dairy\Orders\Dto\" />
+    <Folder Include="Dairy\Routes\" />
+    <Folder Include="Dairy\Routes\Dto\" />
   </ItemGroup>
 </Project>

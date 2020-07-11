@@ -1669,7 +1669,7 @@ namespace Dairy.Migrations
 
             modelBuilder.Entity("Dairy.Dairy.Routes.Route", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
