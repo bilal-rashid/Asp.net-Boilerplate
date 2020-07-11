@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Abp.Authorization.Users;
 using Abp.Extensions;
 using Dairy.Dairy.Orders;
+using Dairy.Dairy.RouteData;
 
 namespace Dairy.Authorization.Users
 {
@@ -32,5 +33,6 @@ namespace Dairy.Authorization.Users
             return user;
         }
         public ICollection<Order> Orders { get; set; }
+        public ICollection<RouteData> RouteData { get; set; }
     }
 }
