@@ -1,5 +1,6 @@
 ﻿using System;
 using Abp.Application.Services.Dto;
+using Dairy.Dairy.Utilities;
 
 namespace Dairy.Dairy.Orders.Dto
 {
@@ -11,6 +12,7 @@ namespace Dairy.Dairy.Orders.Dto
         public string CustomerName { get; set; }
         public long? UserId { get; set; }
         public string Username { get; set; }
+        public OrderType Type { get; set; }
         public DateTime? CreationTime { get; set; }
     }
 }

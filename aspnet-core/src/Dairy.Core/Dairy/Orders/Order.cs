@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities.Auditing;
 using Dairy.Authorization.Users;
 using Dairy.Dairy.Customers;
+using Dairy.Dairy.Utilities;
 
 namespace Dairy.Dairy.Orders
 {
@@ -13,5 +14,6 @@ namespace Dairy.Dairy.Orders
         public User User { get; set; }
         public Customer Customer { get; set; }
         public double TotalPrice { get; set; }
+        public OrderType Type { get; set; }
     }
 }
