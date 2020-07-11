@@ -127,6 +127,12 @@
         
     <text name="Orders">Orders</text>
     <text name="CreateOrder">Create new Order</text>
+        
+    <text name="Routes">Routes</text>
+    <text name="CreateNewRoute">Create new route</text>
+    <text name="UpdateRoute">Update route</text>
+    <text name="DeleteRoute">Delete route</text>
+    <text name="RouteName">Name</text>
 
   </texts>
 </localizationDictionary>

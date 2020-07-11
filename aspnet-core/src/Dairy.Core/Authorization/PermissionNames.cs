@@ -13,5 +13,7 @@
         public const string Pages_Orders = "Pages.Orders";
 
         public const string Pages_Customers = "Pages.Customers";
+
+        public const string Pages_Routes = "Pages.Routes";
     }
 }

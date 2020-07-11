@@ -4,7 +4,7 @@ using Abp.Domain.Entities.Auditing;
 namespace Dairy.Dairy.Routes
 {
     [Table("Dairy_Route")]
-    public class Route : FullAuditedEntity<long>
+    public class Route : FullAuditedEntity<int>
     {
         public string Name { get; set; }
         public string Customers { get; set; }
