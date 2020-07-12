@@ -37,6 +37,17 @@
                     />
                 </mat-form-field>
                 <mat-form-field>
+                    <input
+                            matInput
+                            name="Area"
+                            [placeholder]="'Area' | localize"
+                            [(ngModel)]="customer.area"
+                            required
+                            type="text"
+                            minlength="2"
+                    />
+                </mat-form-field>
+                <mat-form-field>
                       <textarea
                               matInput
                               name="Description"
