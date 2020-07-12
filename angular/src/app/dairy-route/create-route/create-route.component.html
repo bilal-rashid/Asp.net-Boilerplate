@@ -33,7 +33,7 @@
                                 [cdkDropListData]="customers"
                                 class="example-list"
                                 (cdkDropListDropped)="drop($event)">
-                            <div class="example-box" *ngFor="let item of customers" cdkDrag>{{item.name}}</div>
+                            <div class="example-box" *ngFor="let item of customers" cdkDrag>{{item.name+' ('+item.area+')'}}</div>
                         </div>
                     </div>
 
@@ -45,7 +45,7 @@
                                 [cdkDropListData]="done"
                                 class="example-list"
                                 (cdkDropListDropped)="drop($event)">
-                            <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.name}}</div>
+                            <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.name+' ('+item.area+')'}}</div>
                         </div>
                     </div>
                 </div>

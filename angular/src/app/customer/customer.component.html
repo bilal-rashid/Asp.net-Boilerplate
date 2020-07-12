@@ -37,7 +37,7 @@
                     <thead>
                     <tr>
                         <th>{{ "NameLabel" | localize }}</th>
-                        <th>{{ "PrimaryContact" | localize }}</th>
+                        <th>{{ "Area" | localize }}</th>
                         <th>
                             <div style="text-align:center">{{ "Temporary" | localize }}</div>
                         </th>
@@ -56,7 +56,7 @@
                       })
               ">
                         <td>{{ customer.name }}</td>
-                        <td>{{ customer.primaryContact }}</td>
+                        <td>{{ customer.area }}</td>
                         <td align="center">
                             <i class="material-icons check_box" *ngIf="customer.isTemporary">
                                 check_box
