@@ -27,6 +27,7 @@ export class CreateRouteComponent extends AppComponentBase implements OnInit {
     routeName = '';
     routeDescription = '';
     saving = false;
+    loading = false;
     done = [];
   constructor(
       injector: Injector,
@@ -37,10 +38,12 @@ export class CreateRouteComponent extends AppComponentBase implements OnInit {
       super(injector);
   }
   ngOnInit() {
+      this.loading = true;
       this._customerService
           .getAll('', undefined, 0, 5000)
           .pipe(
               finalize(() => {
+                  this.loading = false;
               })
           )
           .subscribe((result: CustomerDtoPagedResultDto) => {

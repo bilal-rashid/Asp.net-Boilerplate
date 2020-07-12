@@ -23,10 +23,10 @@
                     </form>
                 </div>
                 <!--query end-->
-                <mat-spinner *ngIf="customers.length === 0" [color]="color"></mat-spinner>
-                <div *ngIf="customers.length !== 0" cdkDropListGroup>
+                <mat-spinner *ngIf="loading" [color]="color"></mat-spinner>
+                <div *ngIf="!loading" cdkDropListGroup>
                     <div class="example-container">
-                        <h2>Customers</h2>
+                        <h4>Customers</h4>
 
                         <div
                                 cdkDropList
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="example-container">
-                        <h2>Route</h2>
+                        <h4>Route</h4>
 
                         <div
                                 cdkDropList
