@@ -46,6 +46,8 @@ import { EditCustomerDialogComponent } from './customer/edit-customer-dialog/edi
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import {CustomerBillDialogComponent} from '@app/all-orders/customer-bill/customer-bill-dialog.component';
+import { DairyRouteComponent } from './dairy-route/dairy-route.component';
+import { CreateRouteComponent } from './dairy-route/create-route/create-route.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,9 @@ import {CustomerBillDialogComponent} from '@app/all-orders/customer-bill/custome
     EditCustomerDialogComponent,
     CustomerBillDialogComponent,
     CreateOrderComponent,
-    AllOrdersComponent
+    AllOrdersComponent,
+    DairyRouteComponent,
+    CreateRouteComponent
   ],
   imports: [
     CommonModule,

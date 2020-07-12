@@ -12,6 +12,8 @@ import {ProductComponent} from '@app/product/product.component';
 import {CustomerComponent} from '@app/customer/customer.component';
 import {CreateOrderComponent} from '@app/create-order/create-order.component';
 import {AllOrdersComponent} from '@app/all-orders/all-orders.component';
+import {DairyRouteComponent} from '@app/dairy-route/dairy-route.component';
+import {CreateRouteComponent} from '@app/dairy-route/create-route/create-route.component';
 
 @NgModule({
     imports: [
@@ -27,6 +29,10 @@ import {AllOrdersComponent} from '@app/all-orders/all-orders.component';
                     { path: 'order', component: CreateOrderComponent, data: { permission: 'Pages.Orders' }, canActivate: [AppRouteGuard] },
                     { path: 'orders', component: AllOrdersComponent, data: { permission: 'Pages.Orders' }, canActivate: [AppRouteGuard] },
                     { path: 'customers', component: CustomerComponent, data: { permission: 'Pages.Customers' },
+                        canActivate: [AppRouteGuard]},
+                    { path: 'routes', component: DairyRouteComponent, data: { permission: 'Pages.Routes' },
+                        canActivate: [AppRouteGuard]},
+                    { path: 'routes/create', component: CreateRouteComponent, data: { permission: 'Pages.Routes' },
                         canActivate: [AppRouteGuard]},
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
                     { path: 'about', component: AboutComponent },

@@ -1,0 +1,56 @@
+<div class="row clearfix" [@routerTransition]>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card main-content">
+            <div class="header">
+                <h2>Add Route</h2>
+
+            </div>
+            <div class="body table-responsive">
+                <!--query start-->
+                <div class="row clearfix">
+                    <form>
+                        <mat-form-field>
+                            <input matInput placeholder="Route Name" [(ngModel)]="routeName"   name="routeName" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Description" [(ngModel)]="routeDescription"   name="routeDescription">
+                        </mat-form-field>
+                        <div class="row">
+                            <div class="col-md-12 text-right p-r-25">
+                                <button [disabled]="routeName.length === 0 || done.length === 0 || saving" mat-raised-button color="primary" (click)="addRoute()">{{ 'Save' | localize }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--query end-->
+                <mat-spinner *ngIf="customers.length === 0" [color]="color"></mat-spinner>
+                <div *ngIf="customers.length !== 0" cdkDropListGroup>
+                    <div class="example-container">
+                        <h2>Customers</h2>
+
+                        <div
+                                cdkDropList
+                                [cdkDropListData]="customers"
+                                class="example-list"
+                                (cdkDropListDropped)="drop($event)">
+                            <div class="example-box" *ngFor="let item of customers" cdkDrag>{{item.name}}</div>
+                        </div>
+                    </div>
+
+                    <div class="example-container">
+                        <h2>Route</h2>
+
+                        <div
+                                cdkDropList
+                                [cdkDropListData]="done"
+                                class="example-list"
+                                (cdkDropListDropped)="drop($event)">
+                            <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.name}}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
