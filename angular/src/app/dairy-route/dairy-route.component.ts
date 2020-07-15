@@ -85,4 +85,7 @@ export class DairyRouteComponent extends PagedListingComponentBase<RouteDto> {
     createRoute() {
         this._router.navigate(['app/routes/create']);
     }
+    updareRoute(id) {
+        this._router.navigate(['app/routes/update'], { queryParams: { routeId: id } });
+    }
 }

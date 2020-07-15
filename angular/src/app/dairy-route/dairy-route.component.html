@@ -57,10 +57,10 @@
                                 <mat-icon>menu</mat-icon>
                             </button>
                             <mat-menu #actionsMenu="matMenu">
-<!--                                <button mat-menu-item (click)="editCustomer(customer)">-->
-<!--                                    <mat-icon>edit</mat-icon>-->
-<!--                                    <span>{{ "Edit" | localize }}</span>-->
-<!--                                </button>-->
+                                <button mat-menu-item (click)="updareRoute(route.id)">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>{{ "Edit" | localize }}</span>
+                                </button>
                                 <button mat-menu-item (click)="delete(route)">
                                     <mat-icon>delete</mat-icon>
                                     <span>{{ "Delete" | localize }}</span>

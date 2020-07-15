@@ -48,6 +48,7 @@ import { AllOrdersComponent } from './all-orders/all-orders.component';
 import {CustomerBillDialogComponent} from '@app/all-orders/customer-bill/customer-bill-dialog.component';
 import { DairyRouteComponent } from './dairy-route/dairy-route.component';
 import { CreateRouteComponent } from './dairy-route/create-route/create-route.component';
+import { UpdateRouteComponent } from './dairy-route/update-route/update-route.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { CreateRouteComponent } from './dairy-route/create-route/create-route.co
     CreateOrderComponent,
     AllOrdersComponent,
     DairyRouteComponent,
-    CreateRouteComponent
+    CreateRouteComponent,
+    UpdateRouteComponent
   ],
   imports: [
     CommonModule,
