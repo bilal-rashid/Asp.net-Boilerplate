@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "https://dairy.azurewebsites.net/swagger/v1/swagger.json",
+      "url": "http://localhost:5000/swagger/v1/swagger.json",
       "output": null
     }
   },

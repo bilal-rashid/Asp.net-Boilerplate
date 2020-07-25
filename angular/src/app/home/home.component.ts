@@ -2,16 +2,17 @@ import { Component, Injector, AfterViewInit } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import {
-    CreateOrEditOrderDto,
+    CreateOrEditOrderDto, CreateOrEditRouteDataDto,
     CustomerDto, CustomerDtoPagedResultDto,
     CustomerServiceProxy,
     OrderServiceProxy,
     ProductDto, ProductDtoPagedResultDto,
-    ProductServiceProxy
+    ProductServiceProxy, RouteDataDto, RouteDataResultDto, RouteDataServiceProxy
 } from '@shared/service-proxies/service-proxies';
 import {MatDialog} from '@node_modules/@angular/material';
 import {AbpSessionService} from '@abp/session/abp-session.service';
 import {finalize} from '@node_modules/rxjs/operators';
+import {Router} from '@node_modules/@angular/router';
 
 @Component({
     templateUrl: './home.component.html',
@@ -22,14 +23,18 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
     products: ProductDto[] = [];
     customers: CustomerDto[] = [];
     customerId: any;
+    routeDataDto: RouteDataDto;
+    routeCustomers = [];
     keyword = '';
     constructor(
         injector: Injector,
         private _productsService: ProductServiceProxy,
+        private _routeDataService: RouteDataServiceProxy,
         private _ordersService: OrderServiceProxy,
         private _dialog: MatDialog,
         private _customerService: CustomerServiceProxy,
-        private _sessionService: AbpSessionService
+        private _sessionService: AbpSessionService,
+        private _router: Router,
     ) {
         super(injector);
     }
@@ -53,18 +58,35 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+        this._routeDataService.getRouteData(this._sessionService.userId).subscribe((routeDataResult: RouteDataResultDto) => {
+            if (routeDataResult.error) {
+                this._router.navigate(['app/select-route']);
+                return;
+            } else {
+                this.routeCustomers = JSON.parse(routeDataResult.routeData.pendingCustomers);
+                this.routeDataDto = routeDataResult.routeData;
+                this.getProducts();
+                this._customerService
+                    .getAll('', undefined, 0, 2000)
+                    .pipe(
+                        finalize(() => {
+                            // finishedCallback();
+                        })
+                    )
+                    .subscribe((result: CustomerDtoPagedResultDto) => {
+                        this.customers = result.items;
+                        if (this.routeCustomers.length > 0) {
+                            this.customerId = this.routeCustomers[0];
+                        } else {
+                            abp.message.success(
+                                'Route has been Completed',
+                                'End',
+                            );
+                        }
 
-        this.getProducts();
-        this._customerService
-            .getAll('', undefined, 0, 2000)
-            .pipe(
-                finalize(() => {
-                    // finishedCallback();
-                })
-            )
-            .subscribe((result: CustomerDtoPagedResultDto) => {
-                this.customers = result.items;
-            });
+                    });
+            }
+        });
     }
     confirmAndCreate(): void {
         abp.message.confirm(
@@ -100,7 +122,28 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
             .subscribe(() => {
                 // this.notify.info(this.l('SavedSuccessfully'));
                 abp.notify.success(this.l('SavedSuccessfully'));
+                this.updateRouteData();
                 this.getProducts();
+            });
+    }
+    updateRouteData() {
+        this.routeCustomers.shift();
+        if (this.routeCustomers.length > 0) {
+            this.customerId = this.routeCustomers[0];
+        } else {
+            abp.message.info(
+                'Route has been Completed',
+                undefined,
+            );
+        }
+        let routeData = new CreateOrEditRouteDataDto();
+        routeData.id = this.routeDataDto.id;
+        routeData.name = this.routeDataDto.name;
+        routeData.userId = this._sessionService.userId;
+        routeData.pendingCustomers = JSON.stringify(this.routeCustomers);
+        this._routeDataService
+            .createOrEdit(routeData)
+            .subscribe(result => {
             });
     }
     isCartEmpty(): boolean {

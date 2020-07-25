@@ -6,7 +6,7 @@
     <div class="row clearfix">
         <form>
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-8 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <mat-form-field>
                         <mat-select [placeholder]="l('Customer')" [(ngModel)]="customerId"  name="isActive">
                             <mat-option *ngFor="let customer of customers"
@@ -30,7 +30,7 @@
 
     <!-- Widgets -->
     <div class="row clearfix">
-        <div *ngFor="let product of products" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div *ngFor="let product of products" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <input style="width: 100px; font-size: large;" min="0" [(ngModel)]="product.quantity" type="number" id="{{product.id}}" name="pin" maxlength="6" size="6">
             <div (click)="add(product)"  class="info-box bg-pink hover-expand-effect">
                 <div  class="icon">
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div style="margin-bottom: 20px" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div style="margin-bottom: 20px" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <button style="font-size: large" [disabled]="!customerId || isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate()">Submit</button>
         </div>
     </div>
