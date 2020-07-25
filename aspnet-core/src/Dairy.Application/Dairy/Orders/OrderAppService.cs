@@ -74,6 +74,7 @@ namespace Dairy.Dairy.Orders
                 && e.CreationTime <= input.EndDate);
 
             var pagedOrders = orders
+                .OrderBy("id desc")
                 .PageBy(input);
 
             var pagedResult = from o in pagedOrders
