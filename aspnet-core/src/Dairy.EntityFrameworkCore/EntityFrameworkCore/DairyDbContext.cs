@@ -8,6 +8,8 @@ using Dairy.Dairy.Customers;
 using Dairy.Dairy.Orders;
 using Dairy.Dairy.Routes;
 using Dairy.Dairy.RouteData;
+using Dairy.Dairy.CustomerBills;
+using Dairy.Dairy.CustomerBillsData;
 
 namespace Dairy.EntityFrameworkCore
 {
@@ -19,6 +21,8 @@ namespace Dairy.EntityFrameworkCore
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Route> Routes { get; set; }
         public virtual DbSet<RouteData> RouteData { get; set; }
+        public virtual DbSet<CustomerBill> CustomerBills { get; set; }
+        public virtual DbSet<CustomerBillData> CustomerBillsData { get; set; }
 
         public DairyDbContext(DbContextOptions<DairyDbContext> options)
             : base(options)
