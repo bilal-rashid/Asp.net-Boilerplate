@@ -38,6 +38,7 @@
                     <tr>
                         <th>{{ "NameLabel" | localize }}</th>
                         <th>{{ "Area" | localize }}</th>
+                        <th>Bill (PKR)</th>
                         <th>
                             <div style="text-align:center">{{ "Temporary" | localize }}</div>
                         </th>
@@ -57,6 +58,8 @@
               ">
                         <td>{{ customer.name }}</td>
                         <td>{{ customer.area }}</td>
+                        <td>{{ customerBills[(customer.id).toString()]}}</td>
+                        <td>{{ (customerBills[(customer.id).toString()] !== undefined && customerBills[(customer.id).toString()] !== null) ? customerBills[(customer.id).toString()]: 'loading...' }}</td>
                         <td align="center">
                             <i class="material-icons check_box" *ngIf="customer.isTemporary">
                                 check_box

@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Abp.Authorization;
 using Dairy.Authorization;
+using Dairy.Dairy.CustomerBills;
 
 namespace Dairy.Dairy.Orders
 {
@@ -23,11 +24,13 @@ namespace Dairy.Dairy.Orders
         private readonly IRepository<Order, long> _orderRepository;
         private readonly IRepository<Product, int> _productRepository;
         private readonly IRepository<Customer, int> _customerRepository;
+        private readonly IRepository<CustomerBill, long> _customerBillRepo;
         private readonly UserManager _userManager;
         private readonly IAbpSession _session;
         public OrderAppService(IRepository<Order, long> orderRepository,
             IRepository<Product, int> productRepository,
             IRepository<Customer, int> customerRepository,
+            IRepository<CustomerBill, long> customerBillRepo,
             UserManager userManager,
             IAbpSession session)
         {
@@ -36,6 +39,7 @@ namespace Dairy.Dairy.Orders
             _customerRepository = customerRepository;
             _userManager = userManager;
             _session = session;
+            _customerBillRepo = customerBillRepo;
         }
 
         public async Task CreateOrEdit(CreateOrEditOrderDto input)
@@ -47,10 +51,28 @@ namespace Dairy.Dairy.Orders
         {
             User user;
             Customer customer;
+            customer = await _customerRepository.GetAsync(input.CustomerId);
+            CustomerBill customerBill;
+            var customerBills = _customerBillRepo.GetAll().Where(p => p.Customer.Id == input.CustomerId);
+            if (customerBills.Count() > 0)
+            {
+                customerBill = await customerBills.FirstAsync();
+                customerBill.PendingAmount += input.TotalPrice;
+                await _customerBillRepo.UpdateAsync(customerBill);
+            }
+            else
+            {
+                customerBill = new CustomerBill
+                {
+                    Customer = customer,
+                    PendingAmount = input.TotalPrice
+                };
+                await _customerBillRepo.InsertAsync(customerBill);
+            }
+
             var order = ObjectMapper.Map<Order>(input);
             user = await _userManager.GetUserByIdAsync(input.UserId);
             order.User = user;
-            customer = await _customerRepository.GetAsync(input.CustomerId);
             order.Customer = customer;
             foreach(ProductDto item in input.Products) {
                 var product = await _productRepository.GetAsync(item.Id);
@@ -105,6 +127,30 @@ namespace Dairy.Dairy.Orders
             var order = await _orderRepository.GetAsync(input.Id);
             var output = new GetOrderForViewDto { Order = ObjectMapper.Map<OrderDto>(order) };
             return output;
+        }
+        public async Task<double> GetCustomerBill(int CustomerId)
+        {
+            var customerBills = _customerBillRepo.GetAll().Where(p => p.Customer.Id == CustomerId);
+            if (customerBills.Count() > 0)
+            {
+                var bill = await customerBills.FirstAsync();
+                return bill.PendingAmount;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public async Task UpdateCustomerBill(UpdateBillDto Input)
+        {
+            var customerBills = _customerBillRepo.GetAll().Where(p => p.Customer.Id == Input.CustomerId);
+            if (customerBills.Count() > 0)
+            {
+                var bill = await customerBills.FirstAsync();
+                bill.PendingAmount -= Input.Amount;
+                await _customerBillRepo.UpdateAsync(bill);
+
+            }
         }
     }
 }

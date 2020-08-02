@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {PagedListingComponentBase, PagedRequestDto} from '@shared/paged-listing-component-base';
 import {
     CustomerDto, CustomerDtoPagedResultDto,
-    CustomerServiceProxy,
+    CustomerServiceProxy, OrderServiceProxy,
     ProductDto
 } from '@shared/service-proxies/service-proxies';
 import {Injector} from '@node_modules/@angular/core';
@@ -33,10 +33,12 @@ export class CustomerComponent extends PagedListingComponentBase<CustomerDto> {
     customers: CustomerDto[] = [];
 
     keyword = '';
+    customerBills = {};
 
     constructor(
         injector: Injector,
         private _customerService: CustomerServiceProxy,
+        private _orderService: OrderServiceProxy,
         private _router: Router,
         private _dialog: MatDialog
     ) {
@@ -59,8 +61,20 @@ export class CustomerComponent extends PagedListingComponentBase<CustomerDto> {
             )
             .subscribe((result: CustomerDtoPagedResultDto) => {
                 this.customers = result.items;
+                this.customers.forEach(customer => {
+                    if (!this.customerBills[customer.id]) {
+                        this.getBill(customer.id);
+                    }
+                });
                 this.showPaging(result, pageNumber);
             });
+    }
+    getBill(id) {
+        this._orderService.getCustomerBill(id).subscribe((result: number) => {
+            this.customerBills[id.toString()] = result;
+            console.log(this.customerBills);
+        });
+
     }
     delete(customer: CustomerDto): void {
         abp.message.confirm(

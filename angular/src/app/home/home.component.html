@@ -48,8 +48,12 @@
         <div style="margin-bottom: 20px" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <button style="font-size: large" [disabled]="!customerId || isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate()">Submit</button>
         </div>
-        <div style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <button style="font-size: large" [disabled]="!customerId" mat-raised-button color="warn" (click)="confirmAndSkip()">Skip</button>
+        <div *ngIf="routeCustomers.length === 0" style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <button style="font-size: large" mat-raised-button color="warn" (click)="confirmAndSkip()">Skip</button>
+        </div>
+        <br/>
+        <div style="margin-bottom: 20px; margin-top: 50px" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button style="font-size: large" mat-raised-button color="accent" (click)="confirmAndSkip()">Bill Submission</button>
         </div>
     </div>
     <!-- #END# Widgets -->
