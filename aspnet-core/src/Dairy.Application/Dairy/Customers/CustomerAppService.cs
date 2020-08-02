@@ -24,7 +24,7 @@ namespace Dairy.Dairy.Customers
             return base.CreateFilteredQuery(input)
                 .WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false || e.Name.Contains(input.Filter)
                 || e.Address.Contains(input.Filter) || e.PrimaryContact.Contains(input.Filter)
-                || e.Description.Contains(input.Filter));
+                || e.Description.Contains(input.Filter) || e.Area.Contains(input.Filter));
         }
     }
 }
