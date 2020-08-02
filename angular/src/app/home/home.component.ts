@@ -99,6 +99,17 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
             }
         );
     }
+    confirmAndSkip(): void {
+        abp.message.confirm(
+            'Skip Customer',
+            undefined,
+            (result: boolean) => {
+                if (result) {
+                    this.shiftRouteData();
+                }
+            }
+        );
+    }
     createOrder(): void {
         const orderDto: CreateOrEditOrderDto = new CreateOrEditOrderDto();
         let totalPrice = 0;
@@ -126,12 +137,27 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
                 this.getProducts();
             });
     }
-    updateRouteData() {
+    shiftRouteData() {
         this.routeCustomers.shift();
+        this.saveRouteData();
+    }
+    updateRouteData() {
+        if (this.routeCustomers[0] === this.customerId) {
+            this.routeCustomers.shift();
+            this.saveRouteData();
+        } else {
+            if (this.routeCustomers.includes(this.customerId)) {
+                let itemIndex = this.routeCustomers.indexOf(this.customerId);
+                this.routeCustomers.splice(itemIndex, 1);
+                this.saveRouteData();
+            }
+        }
+    }
+    saveRouteData() {
         if (this.routeCustomers.length > 0) {
             this.customerId = this.routeCustomers[0];
         } else {
-            abp.message.info(
+            abp.message.success(
                 'Route has been Completed',
                 undefined,
             );
