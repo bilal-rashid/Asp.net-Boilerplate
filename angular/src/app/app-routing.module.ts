@@ -16,6 +16,7 @@ import {DairyRouteComponent} from '@app/dairy-route/dairy-route.component';
 import {CreateRouteComponent} from '@app/dairy-route/create-route/create-route.component';
 import {UpdateRouteComponent} from '@app/dairy-route/update-route/update-route.component';
 import {SelectRouteComponent} from '@app/select-route/select-route.component';
+import {BillCustomerComponent} from '@app/bill-customer/bill-customer.component';
 
 @NgModule({
     imports: [
@@ -31,6 +32,8 @@ import {SelectRouteComponent} from '@app/select-route/select-route.component';
                     { path: 'order', component: CreateOrderComponent, data: { permission: 'Pages.Orders' }, canActivate: [AppRouteGuard] },
                     { path: 'orders', component: AllOrdersComponent, data: { permission: 'Pages.Orders' }, canActivate: [AppRouteGuard] },
                     { path: 'customers', component: CustomerComponent, data: { permission: 'Pages.Customers' },
+                        canActivate: [AppRouteGuard]},
+                    { path: 'bill-customers', component: BillCustomerComponent, data: { permission: 'Pages.Customers' },
                         canActivate: [AppRouteGuard]},
                     { path: 'routes', component: DairyRouteComponent, data: { permission: 'Pages.Routes' },
                         canActivate: [AppRouteGuard]},

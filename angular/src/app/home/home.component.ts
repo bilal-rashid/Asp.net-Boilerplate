@@ -88,6 +88,9 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
             }
         });
     }
+    billCustomers() {
+        this._router.navigate(['app/bill-customers']);
+    }
     confirmAndCreate(): void {
         abp.message.confirm(
             'Create order for Customer: ' + this.customers.find( p => p.id === this.customerId).name,
