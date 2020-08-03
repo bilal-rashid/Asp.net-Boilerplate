@@ -15,6 +15,7 @@ using System.Linq;
 using Abp.Authorization;
 using Dairy.Authorization;
 using Dairy.Dairy.CustomerBills;
+using Dairy.Dairy.CustomerBillsData;
 
 namespace Dairy.Dairy.Orders
 {
@@ -25,6 +26,7 @@ namespace Dairy.Dairy.Orders
         private readonly IRepository<Product, int> _productRepository;
         private readonly IRepository<Customer, int> _customerRepository;
         private readonly IRepository<CustomerBill, long> _customerBillRepo;
+        private readonly IRepository<CustomerBillData, long> _billDataRepository;
         private readonly UserManager _userManager;
         private readonly IAbpSession _session;
         public OrderAppService(IRepository<Order, long> orderRepository,
@@ -32,6 +34,7 @@ namespace Dairy.Dairy.Orders
             IRepository<Customer, int> customerRepository,
             IRepository<CustomerBill, long> customerBillRepo,
             UserManager userManager,
+            IRepository<CustomerBillData, long> billRepository,
             IAbpSession session)
         {
             _orderRepository = orderRepository;
@@ -40,6 +43,7 @@ namespace Dairy.Dairy.Orders
             _userManager = userManager;
             _session = session;
             _customerBillRepo = customerBillRepo;
+            _billDataRepository = billRepository;
         }
 
         public async Task CreateOrEdit(CreateOrEditOrderDto input)
@@ -147,8 +151,18 @@ namespace Dairy.Dairy.Orders
             if (customerBills.Count() > 0)
             {
                 var bill = await customerBills.FirstAsync();
+                double pendingBillAmount = bill.PendingAmount;
                 bill.PendingAmount -= Input.Amount;
                 await _customerBillRepo.UpdateAsync(bill);
+                CustomerBillData billData = new CustomerBillData
+                {
+                    CreationTime = DateTime.Now,
+                    BillAmount = pendingBillAmount,
+                    CollectedAmount = Input.Amount,
+                    Difference = pendingBillAmount - Input.Amount,
+                    Customer = bill.Customer
+                };
+                await _billDataRepository.InsertAsync(billData);
 
             }
         }
