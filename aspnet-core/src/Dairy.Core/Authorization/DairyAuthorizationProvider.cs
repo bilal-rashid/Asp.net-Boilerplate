@@ -13,7 +13,8 @@ namespace Dairy.Authorization
             context.CreatePermission(PermissionNames.Pages_Products, L("Products"));
             context.CreatePermission(PermissionNames.Pages_Orders, L("Orders"));
             context.CreatePermission(PermissionNames.Pages_Routes, L("Routes"));
-            context.CreatePermission(PermissionNames.Pages_Customers, L("Customers")); 
+            context.CreatePermission(PermissionNames.Pages_Customers, L("Customers"));
+            context.CreatePermission(PermissionNames.Pages_Customers_Bills, L("CustomersBills"));
             context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
         }
 
