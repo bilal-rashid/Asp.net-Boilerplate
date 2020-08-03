@@ -133,6 +133,7 @@
     <text name="UpdateRoute">Update route</text>
     <text name="DeleteRoute">Delete route</text>
     <text name="RouteName">Name</text>
+    <text name="CustomersBills">Customer Bills</text>
 
   </texts>
 </localizationDictionary>
