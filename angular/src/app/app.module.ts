@@ -51,6 +51,7 @@ import { CreateRouteComponent } from './dairy-route/create-route/create-route.co
 import { UpdateRouteComponent } from './dairy-route/update-route/update-route.component';
 import { SelectRouteComponent } from './select-route/select-route.component';
 import {BillCustomerComponent, BillDialog} from './bill-customer/bill-customer.component';
+import { CustomerBillDataComponent } from './customer-bill-data/customer-bill-data.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import {BillCustomerComponent, BillDialog} from './bill-customer/bill-customer.c
     UpdateRouteComponent,
     SelectRouteComponent,
     BillCustomerComponent,
-      BillDialog
+      BillDialog,
+      CustomerBillDataComponent
   ],
   imports: [
     CommonModule,

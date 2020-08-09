@@ -48,6 +48,8 @@ namespace Dairy.Dairy.CustomerBillsData
                                       CustomerId = o.Customer.Id,
                                       CustomerName = o.Customer.Name,
                                       Difference = o.Difference,
+                                      CustomerArea = o.Customer.Area,
+                                      CustomerAddress = o.Customer.Address,
                                       Id = o.Id
                                   }
 

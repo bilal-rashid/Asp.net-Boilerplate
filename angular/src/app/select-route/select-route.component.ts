@@ -59,4 +59,7 @@ export class SelectRouteComponent extends AppComponentBase implements AfterViewI
                 this._router.navigate(['app/home']);
             });
     }
+    billCustomers() {
+        this._router.navigate(['app/bill-customers']);
+    }
 }

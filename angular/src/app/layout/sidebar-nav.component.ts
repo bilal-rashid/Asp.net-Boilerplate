@@ -15,6 +15,7 @@ export class SideBarNavComponent extends AppComponentBase {
         new MenuItem(this.l('Tenants'), 'Pages.Tenants', 'business', '/app/tenants'),
         new MenuItem(this.l('Orders'), 'Pages.Orders', 'list', '/app/orders'),
         new MenuItem('Create Order', 'Pages.Orders', 'library_add', '/app/order'),
+        new MenuItem(this.l('Bills'), 'Pages.Customers.Bills', 'receipt', '/app/customer-bills'),
         new MenuItem(this.l('Products'), 'Pages.Products', 'kitchen', '/app/products'),
         new MenuItem(this.l('Customers'), 'Pages.Customers', 'person', '/app/customers'),
         new MenuItem(this.l('Routes'), 'Pages.Routes', 'alt_route', '/app/routes'),

@@ -105,6 +105,9 @@ export class CustomerComponent extends PagedListingComponentBase<CustomerDto> {
     goToOrders(id) {
         this._router.navigate(['app/orders'], { queryParams: { customer: id } });
     }
+    goToBills(id) {
+        this._router.navigate(['app/customer-bills'], { queryParams: { customer: id } });
+    }
     showCreateOrEditRoleDialog(id?: number): void {
         let createOrEditCustomerDialog;
         if (id === undefined || id <= 0) {

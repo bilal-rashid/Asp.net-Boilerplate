@@ -24,7 +24,7 @@ class GetOrdersRequestDto extends PagedRequestDto {
   templateUrl: './all-orders.component.html',
   styleUrls: ['./all-orders.component.css']
 })
-export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForViewDto> {
+export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForViewDto> { // GetBillDataForView
 
     customers: CustomerDto[] = [];
     customerId: any;
@@ -79,7 +79,7 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
                         })
                     )
                     .subscribe((result: GetOrderForViewDtoPagedResultDto) => {
-                        this.orders = result.items.reverse();
+                        this.orders = result.items;
                         console.log(this.orders);
                         this.orders.forEach(o => {
                             o['expanded'] = false;

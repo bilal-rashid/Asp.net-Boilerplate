@@ -154,13 +154,15 @@ namespace Dairy.Dairy.Orders
                 double pendingBillAmount = bill.PendingAmount;
                 bill.PendingAmount -= Input.Amount;
                 await _customerBillRepo.UpdateAsync(bill);
+                Customer customer;
+                customer = await _customerRepository.GetAsync(Input.CustomerId);
                 CustomerBillData billData = new CustomerBillData
                 {
                     CreationTime = DateTime.Now,
                     BillAmount = pendingBillAmount,
                     CollectedAmount = Input.Amount,
                     Difference = pendingBillAmount - Input.Amount,
-                    Customer = bill.Customer
+                    Customer = customer
                 };
                 await _billDataRepository.InsertAsync(billData);
 

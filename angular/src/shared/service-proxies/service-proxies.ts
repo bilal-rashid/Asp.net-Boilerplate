@@ -508,6 +508,207 @@ export class CustomerServiceProxy {
 }
 
 @Injectable()
+export class CustomerBillsDataServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    delete(id: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/CustomerBillsData/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param customerId (optional) 
+     * @param startDate (optional) 
+     * @param endDate (optional) 
+     * @param sorting (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return Success
+     */
+    getAll(customerId: number | undefined, startDate: moment.Moment | undefined, endDate: moment.Moment | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<GetBillDataForViewPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/CustomerBillsData/GetAll?";
+        if (customerId === null)
+            throw new Error("The parameter 'customerId' cannot be null.");
+        else if (customerId !== undefined)
+            url_ += "CustomerId=" + encodeURIComponent("" + customerId) + "&"; 
+        if (startDate === null)
+            throw new Error("The parameter 'startDate' cannot be null.");
+        else if (startDate !== undefined)
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "") + "&"; 
+        if (endDate === null)
+            throw new Error("The parameter 'endDate' cannot be null.");
+        else if (endDate !== undefined)
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "") + "&"; 
+        if (sorting === null)
+            throw new Error("The parameter 'sorting' cannot be null.");
+        else if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(<any>response_);
+                } catch (e) {
+                    return <Observable<GetBillDataForViewPagedResultDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GetBillDataForViewPagedResultDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<GetBillDataForViewPagedResultDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetBillDataForViewPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetBillDataForViewPagedResultDto>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getForView(id: number | undefined): Observable<GetBillDataForView> {
+        let url_ = this.baseUrl + "/api/services/app/CustomerBillsData/GetForView?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetForView(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetForView(<any>response_);
+                } catch (e) {
+                    return <Observable<GetBillDataForView>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<GetBillDataForView>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetForView(response: HttpResponseBase): Observable<GetBillDataForView> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetBillDataForView.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetBillDataForView>(<any>null);
+    }
+}
+
+@Injectable()
 export class OrderServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -3554,6 +3755,179 @@ export class CustomerDtoPagedResultDto implements ICustomerDtoPagedResultDto {
 export interface ICustomerDtoPagedResultDto {
     totalCount: number;
     items: CustomerDto[] | undefined;
+}
+
+export class BillDataDto implements IBillDataDto {
+    billAmount: number;
+    collectedAmount: number;
+    difference: number;
+    customerId: number | undefined;
+    customerName: string | undefined;
+    customerArea: string | undefined;
+    customerAddress: string | undefined;
+    creationTime: moment.Moment | undefined;
+    id: number;
+
+    constructor(data?: IBillDataDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.billAmount = _data["billAmount"];
+            this.collectedAmount = _data["collectedAmount"];
+            this.difference = _data["difference"];
+            this.customerId = _data["customerId"];
+            this.customerName = _data["customerName"];
+            this.customerArea = _data["customerArea"];
+            this.customerAddress = _data["customerAddress"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): BillDataDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new BillDataDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["billAmount"] = this.billAmount;
+        data["collectedAmount"] = this.collectedAmount;
+        data["difference"] = this.difference;
+        data["customerId"] = this.customerId;
+        data["customerName"] = this.customerName;
+        data["customerArea"] = this.customerArea;
+        data["customerAddress"] = this.customerAddress;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone(): BillDataDto {
+        const json = this.toJSON();
+        let result = new BillDataDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IBillDataDto {
+    billAmount: number;
+    collectedAmount: number;
+    difference: number;
+    customerId: number | undefined;
+    customerName: string | undefined;
+    customerArea: string | undefined;
+    customerAddress: string | undefined;
+    creationTime: moment.Moment | undefined;
+    id: number;
+}
+
+export class GetBillDataForView implements IGetBillDataForView {
+    billData: BillDataDto;
+
+    constructor(data?: IGetBillDataForView) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.billData = _data["billData"] ? BillDataDto.fromJS(_data["billData"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): GetBillDataForView {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetBillDataForView();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["billData"] = this.billData ? this.billData.toJSON() : <any>undefined;
+        return data; 
+    }
+
+    clone(): GetBillDataForView {
+        const json = this.toJSON();
+        let result = new GetBillDataForView();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IGetBillDataForView {
+    billData: BillDataDto;
+}
+
+export class GetBillDataForViewPagedResultDto implements IGetBillDataForViewPagedResultDto {
+    totalCount: number;
+    items: GetBillDataForView[] | undefined;
+
+    constructor(data?: IGetBillDataForViewPagedResultDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalCount = _data["totalCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items.push(GetBillDataForView.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): GetBillDataForViewPagedResultDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetBillDataForViewPagedResultDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): GetBillDataForViewPagedResultDto {
+        const json = this.toJSON();
+        let result = new GetBillDataForViewPagedResultDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IGetBillDataForViewPagedResultDto {
+    totalCount: number;
+    items: GetBillDataForView[] | undefined;
 }
 
 export class ProductDto implements IProductDto {
