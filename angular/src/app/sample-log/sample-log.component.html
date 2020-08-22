@@ -1,0 +1,44 @@
+<div [@routerTransition]>
+
+
+    <!-- Widgets -->
+    <mat-spinner style="margin-bottom: 10px; margin-top: 10px" *ngIf="loading" [color]="color"></mat-spinner>
+    <div class="row clearfix">
+        <div *ngFor="let product of products" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input style="width: 100px; font-size: large;" min="0" [(ngModel)]="product.quantity" type="number" id="{{product.id}}" name="pin" maxlength="6" size="6">
+            <div (click)="add(product)"  class="info-box bg-pink hover-expand-effect">
+                <div  class="icon">
+                    <i class="material-icons">add_circle</i>
+                </div>
+                <div class="content">
+                    <div class="text">{{ product['quantity1'] | number:  '1.2-2'}}{{'  ' + product.unit}}</div>
+                    <div style="font-size: 18px" class="number count-to">
+                        {{product.name}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <button style="font-size: large" [disabled]="isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate(orderEnum.Sample)">Sample</button>
+        </div>
+        <div style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <button style="font-size: large" [disabled]="isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate(orderEnum.Charity)">Charity</button>
+        </div>
+        <div style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <button style="font-size: large" [disabled]="isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate(orderEnum.Waste)">Waste</button>
+        </div>
+<!--        <div *ngIf="routeCustomers.length > 0" style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">-->
+<!--            <button style="font-size: large" mat-raised-button color="warn" (click)="confirmAndSkip()">Skip</button>-->
+<!--        </div>-->
+<!--        <br/>-->
+<!--        <div style="margin-bottom: 20px; margin-top: 50px" class="col-lg-7 col-md-7 col-sm-7 col-xs-7">-->
+<!--            <button style="font-size: large" mat-raised-button color="accent" (click)="billCustomers()">Bill Submission</button>-->
+<!--        </div>-->
+<!--        <div style="margin-bottom: 20px; margin-top: 50px" class="col-lg-5 col-md-5 col-sm-5 col-xs-5">-->
+<!--            <button style="font-size: large" mat-raised-button color="accent" (click)="billCustomers()">Samples</button>-->
+<!--        </div>-->
+    </div>
+
+
+</div>

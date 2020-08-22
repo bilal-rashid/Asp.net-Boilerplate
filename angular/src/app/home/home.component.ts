@@ -9,7 +9,7 @@ import {
     ProductDto, ProductDtoPagedResultDto,
     ProductServiceProxy, RouteDataDto, RouteDataResultDto, RouteDataServiceProxy
 } from '@shared/service-proxies/service-proxies';
-import {MatDialog} from '@node_modules/@angular/material';
+import {MatDialog, ThemePalette} from '@node_modules/@angular/material';
 import {AbpSessionService} from '@abp/session/abp-session.service';
 import {finalize} from '@node_modules/rxjs/operators';
 import {Router} from '@node_modules/@angular/router';
@@ -26,6 +26,8 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
     routeDataDto: RouteDataDto;
     routeCustomers = [];
     keyword = '';
+    loading = false;
+    color: ThemePalette = 'primary';
     constructor(
         injector: Injector,
         private _productsService: ProductServiceProxy,
@@ -40,10 +42,11 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
     }
     getProducts(): void {
         this._productsService
-            .getAll(this.keyword, undefined, 0, 20)
+            .getAll(this.keyword, undefined, 0, 200)
             .pipe(
                 finalize(() => {
                     // finishedCallback();
+                    this.loading = false;
                 })
             )
             .subscribe((result: ProductDtoPagedResultDto) => {
@@ -58,6 +61,7 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+        this.loading = true;
         this._routeDataService.getRouteData(this._sessionService.userId).subscribe((routeDataResult: RouteDataResultDto) => {
             if (routeDataResult.error) {
                 this._router.navigate(['app/select-route']);
@@ -90,6 +94,9 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
     }
     billCustomers() {
         this._router.navigate(['app/bill-customers']);
+    }
+    logSample() {
+        this._router.navigate(['app/sample']);
     }
     confirmAndCreate(): void {
         abp.message.confirm(
@@ -179,11 +186,11 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
         return this.products.filter(p => p.quantity > 0).length === 0;
     }
     add (product): void {
-        product.quantity = product.quantity + 0.5;
+        product.quantity = product.quantity + 1;
     }
     subtract (product): void {
         if (product.quantity > 0) {
-            product.quantity = product.quantity - 0.5;
+            product.quantity = product.quantity - 1;
         }
     }
 

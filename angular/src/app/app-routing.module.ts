@@ -18,6 +18,7 @@ import {UpdateRouteComponent} from '@app/dairy-route/update-route/update-route.c
 import {SelectRouteComponent} from '@app/select-route/select-route.component';
 import {BillCustomerComponent} from '@app/bill-customer/bill-customer.component';
 import {CustomerBillDataComponent} from '@app/customer-bill-data/customer-bill-data.component';
+import {SampleLogComponent} from '@app/sample-log/sample-log.component';
 
 @NgModule({
     imports: [
@@ -31,6 +32,7 @@ import {CustomerBillDataComponent} from '@app/customer-bill-data/customer-bill-d
                     { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
                     { path: 'products', component: ProductComponent, data: { permission: 'Pages.Products' }, canActivate: [AppRouteGuard] },
                     { path: 'order', component: CreateOrderComponent, data: { permission: 'Pages.Orders' }, canActivate: [AppRouteGuard] },
+                    { path: 'sample', component: SampleLogComponent, data: { permission: 'Pages.Orders' }, canActivate: [AppRouteGuard] },
                     { path: 'orders', component: AllOrdersComponent, data: { permission: 'Pages.Orders' }, canActivate: [AppRouteGuard] },
                     { path: 'customer-bills', component: CustomerBillDataComponent, data: { permission: 'Pages.Customers.Bills' }, canActivate: [AppRouteGuard] },
                     { path: 'customers', component: CustomerComponent, data: { permission: 'Pages.Customers' },

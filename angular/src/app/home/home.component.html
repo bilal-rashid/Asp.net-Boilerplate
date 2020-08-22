@@ -1,7 +1,7 @@
 ﻿<div [@routerTransition]>
 
     <div class="block-header">
-        <h2>Instant Order</h2>
+        <button style="font-size: large" [disabled]="!customerId || isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate()">Submit</button>
     </div>
     <div style="margin: 0px" class="row clearfix">
         <form>
@@ -29,6 +29,7 @@
     </div>
 
     <!-- Widgets -->
+    <mat-spinner style="margin-bottom: 10px; margin-top: 10px" *ngIf="loading" [color]="color"></mat-spinner>
     <div class="row clearfix">
         <div *ngFor="let product of products" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <input style="width: 100px; font-size: large;" min="0" [(ngModel)]="product.quantity" type="number" id="{{product.id}}" name="pin" maxlength="6" size="6">
@@ -48,12 +49,15 @@
         <div style="margin-bottom: 20px" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <button style="font-size: large" [disabled]="!customerId || isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate()">Submit</button>
         </div>
-        <div *ngIf="routeCustomers.length === 0" style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div *ngIf="routeCustomers.length > 0" style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             <button style="font-size: large" mat-raised-button color="warn" (click)="confirmAndSkip()">Skip</button>
         </div>
         <br/>
-        <div style="margin-bottom: 20px; margin-top: 50px" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div style="margin-bottom: 20px; margin-top: 50px" class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
             <button style="font-size: large" mat-raised-button color="accent" (click)="billCustomers()">Bill Submission</button>
+        </div>
+        <div style="margin-bottom: 20px; margin-top: 50px" class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+            <button style="font-size: large" mat-raised-button color="accent" (click)="logSample()">Samples</button>
         </div>
     </div>
     <!-- #END# Widgets -->
