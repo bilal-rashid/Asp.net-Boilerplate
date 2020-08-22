@@ -16,6 +16,7 @@ using Abp.Authorization;
 using Dairy.Authorization;
 using Dairy.Dairy.CustomerBills;
 using Dairy.Dairy.CustomerBillsData;
+using Dairy.Dairy.Utilities;
 
 namespace Dairy.Dairy.Orders
 {
@@ -50,7 +51,25 @@ namespace Dairy.Dairy.Orders
         {
             await Create(input);
         }
-
+        public async Task CreateOrEditOther(CreateOrEditOtherOrderDto input)
+        {
+            await CreateOther(input);
+        }
+        protected virtual async Task CreateOther(CreateOrEditOtherOrderDto input)
+        {
+            User user;
+            var order = ObjectMapper.Map<Order>(input);
+            user = await _userManager.GetUserByIdAsync(input.UserId);
+            order.User = user;
+            order.Type = input.Type;
+            foreach (ProductDto item in input.Products)
+            {
+                var product = await _productRepository.GetAsync(item.Id);
+                product.Quantity -= item.Quantity;
+                await _productRepository.UpdateAsync(product);
+            }
+            await _orderRepository.InsertAsync(order);
+        }
         protected virtual async Task Create(CreateOrEditOrderDto input)
         {
             User user;
@@ -78,6 +97,7 @@ namespace Dairy.Dairy.Orders
             user = await _userManager.GetUserByIdAsync(input.UserId);
             order.User = user;
             order.Customer = customer;
+            order.Type = OrderType.Normal;
             foreach(ProductDto item in input.Products) {
                 var product = await _productRepository.GetAsync(item.Id);
                 product.Quantity = product.Quantity - item.Quantity;
@@ -92,9 +112,46 @@ namespace Dairy.Dairy.Orders
             await _orderRepository.DeleteAsync(input.Id);
         }
 
+        public async Task<PagedResultDto<GetOrderForViewDto>> GetAllOther(GetAllOrdersInputDto input)
+        {
+            var orders = _orderRepository.GetAll().Where(p => p.Type == OrderType.Charity || p.Type == OrderType.Sample || p.Type == OrderType.Waste)
+                .WhereIf(input.UserId != null, e => e.User.Id == input.UserId)
+                .WhereIf(input.Type != null, e => e.Type == input.Type)
+                .WhereIf(input.StartDate != null && input.EndDate != null, e => e.CreationTime >= input.StartDate
+                && e.CreationTime <= input.EndDate);
+
+            var pagedOrders = orders
+                .OrderBy("id desc")
+                .PageBy(input);
+
+            var pagedResult = from o in pagedOrders
+                              select new GetOrderForViewDto
+                              {
+                                  Order = new OrderDto()
+                                  {
+                                      UserId = o.User.Id,
+                                      Id = o.Id,
+                                      CreationTime = o.CreationTime,
+                                      CustomerId = o.Customer.Id,
+                                      CustomerName = o.Customer.Name,
+                                      Username = o.User.FullName,
+                                      TotalPrice = o.TotalPrice,
+                                      OrderItems = o.OrderItems,
+                                      Type = o.Type
+                                  }
+
+                              };
+            var totalCount = await orders.CountAsync();
+            return new PagedResultDto<GetOrderForViewDto>(
+                totalCount,
+                await pagedResult.ToListAsync()
+            );
+        }
+
         public async Task<PagedResultDto<GetOrderForViewDto>> GetAll(GetAllOrdersInputDto input)
         {
-            var orders = _orderRepository.GetAll().WhereIf(input.CustomerId != null, e => e.Customer.Id == input.CustomerId)
+            var orders = _orderRepository.GetAll().Where(p => p.Type == OrderType.Normal)
+                .WhereIf(input.CustomerId != null, e => e.Customer.Id == input.CustomerId)
                 .WhereIf(input.UserId != null, e => e.User.Id == input.UserId)
                 .WhereIf(input.StartDate != null && input.EndDate != null, e => e.CreationTime >= input.StartDate
                 && e.CreationTime <= input.EndDate);
@@ -115,7 +172,8 @@ namespace Dairy.Dairy.Orders
                                     CustomerName = o.Customer.Name,
                                     Username = o.User.FullName,
                                     TotalPrice = o.TotalPrice,
-                                    OrderItems = o.OrderItems
+                                    OrderItems = o.OrderItems,
+                                    Type = o.Type
                                 }
                                                               
                             };

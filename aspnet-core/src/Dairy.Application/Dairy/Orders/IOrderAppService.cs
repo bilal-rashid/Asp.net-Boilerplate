@@ -8,10 +8,12 @@ namespace Dairy.Dairy.Orders
     public interface IOrderAppService
     {
         Task<PagedResultDto<GetOrderForViewDto>> GetAll(GetAllOrdersInputDto input);
+        Task<PagedResultDto<GetOrderForViewDto>> GetAllOther(GetAllOrdersInputDto input);
 
         Task<GetOrderForViewDto> GetForView(EntityDto input);
 
         Task CreateOrEdit(CreateOrEditOrderDto input);
+        Task CreateOrEditOther(CreateOrEditOtherOrderDto input);
 
         Task Delete(EntityDto input);
     }
