@@ -9,6 +9,8 @@ namespace Dairy.Dairy.Orders.Dto
         {
             CreateMap<CreateOrEditOrderDto, Order>();
 
+            CreateMap<CreateOrEditOtherOrderDto, Order>();
+
             CreateMap<Order, OrderDto>();
         }
     }

@@ -53,6 +53,7 @@ import { SelectRouteComponent } from './select-route/select-route.component';
 import {BillCustomerComponent, BillDialog} from './bill-customer/bill-customer.component';
 import { CustomerBillDataComponent } from './customer-bill-data/customer-bill-data.component';
 import { SampleLogComponent } from './sample-log/sample-log.component';
+import { AllSamplesComponent } from './all-samples/all-samples.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { SampleLogComponent } from './sample-log/sample-log.component';
     BillCustomerComponent,
       BillDialog,
       CustomerBillDataComponent,
-      SampleLogComponent
+      SampleLogComponent,
+      AllSamplesComponent
   ],
   imports: [
     CommonModule,

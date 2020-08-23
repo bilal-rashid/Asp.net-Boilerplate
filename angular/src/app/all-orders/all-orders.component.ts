@@ -74,7 +74,7 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
                 }
                 this._orderService
                     .getAll(this.customerId, this.userId, (this.startDate) ? moment(this.startDate).startOf('day').utc(true) : undefined,
-                        (this.startDate) ? moment(this.endDate).endOf('day').utc(true) : undefined,null, request.sorting, request.skipCount, request.maxResultCount)
+                        (this.startDate) ? moment(this.endDate).endOf('day').utc(true) : undefined,undefined, request.sorting, request.skipCount, request.maxResultCount)
                     .pipe(
                         finalize(() => {
                             finishedCallback();
@@ -122,7 +122,7 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
         this._orderService.getCustomerBill(this.customerId).subscribe((resultTotal: number) => {
             this._orderService
                 .getAll(this.customerId, this.userId, (this.startDate) ? moment(this.startDate).startOf('day').utc(true) : undefined,
-                    (this.startDate) ? moment(this.endDate).endOf('day').utc(true) : undefined,null, undefined, 0, 5000)
+                    (this.startDate) ? moment(this.endDate).endOf('day').utc(true) : undefined,undefined, undefined, 0, 5000)
                 .pipe(
                     finalize(() => {
                     })
