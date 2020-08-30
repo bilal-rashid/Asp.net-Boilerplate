@@ -40,6 +40,8 @@ export class RightSideBarComponent extends AppComponentBase implements OnInit {
     ];
 
     selectedThemeCssClass = 'red';
+    marketing: string;
+    footer: string;
 
     constructor(
         injector: Injector,
@@ -51,6 +53,8 @@ export class RightSideBarComponent extends AppComponentBase implements OnInit {
     ngOnInit(): void {
         this.selectedThemeCssClass = this.setting.get('App.UiTheme');
         $('body').addClass('theme-' + this.selectedThemeCssClass);
+        this.marketing = this.setting.get('App.Tenant.Marketing');
+        this.footer = this.setting.get('App.Tenant.Footer');
     }
 
     setTheme(theme: UiThemeInfo): void {
@@ -65,6 +69,12 @@ export class RightSideBarComponent extends AppComponentBase implements OnInit {
             $body.addClass('theme-' + theme.cssClass);
 
             this.selectedThemeCssClass = theme.cssClass;
+        });
+    }
+    saveSettings() {
+        this._configurationService.changeMarketingLine(this.marketing).subscribe(() => {
+        });
+        this._configurationService.changeFooter(this.footer).subscribe(() => {
         });
     }
 }
