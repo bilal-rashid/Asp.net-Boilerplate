@@ -19,13 +19,16 @@
                 </div>
             </div>
         </div>
-        <div style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div style="margin-bottom: 30px" class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+            <button style="font-size: large" [disabled]="isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate(orderEnum.Cash_Sale)">Cash Sale</button>
+        </div>
+        <div style="margin-bottom: 30px" class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
             <button style="font-size: large" [disabled]="isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate(orderEnum.Sample)">Sample</button>
         </div>
-        <div style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div style="margin-bottom: 20px" class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
             <button style="font-size: large" [disabled]="isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate(orderEnum.Charity)">Charity</button>
         </div>
-        <div style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div style="margin-bottom: 20px" class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
             <button style="font-size: large" [disabled]="isCartEmpty()" mat-raised-button color="primary" (click)="confirmAndCreate(orderEnum.Waste)">Waste</button>
         </div>
 <!--        <div *ngIf="routeCustomers.length > 0" style="margin-bottom: 20px" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">-->

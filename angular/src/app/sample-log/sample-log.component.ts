@@ -67,6 +67,8 @@ export class SampleLogComponent extends AppComponentBase implements AfterViewIni
             message = 'Create Sample Order?';
         } else if (type === OrderType.Waste) {
             message = 'Log Waste?';
+        } else if (type === OrderType.Cash_Sale) {
+            message = 'Log Cash Sale?';
         } else {
             message = 'Log Charity?';
         }

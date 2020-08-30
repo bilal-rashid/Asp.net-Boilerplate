@@ -79,6 +79,7 @@
                             <div class="col-md-3">
                                 <mat-form-field>
                                     <mat-select [placeholder]="l('Type')" [(ngModel)]="selectedType"  name="isActive">
+                                        <mat-option [value]="orderEnum.Cash_Sale">{{'Cash Sale'}}</mat-option>
                                         <mat-option [value]="orderEnum.Sample">{{l('Sample')}}</mat-option>
                                         <mat-option [value]="orderEnum.Charity">{{l('Charity')}}</mat-option>
                                         <mat-option [value]="orderEnum.Waste">{{l('Waste')}}</mat-option>
@@ -135,8 +136,9 @@
                             <td>{{ order.order.creationTime | date}}</td>
                             <td>{{ order.order.totalPrice.toString().replace('/\B(?=(\d{3})+(?!\d))/g', ",") }}</td>
                             <td>
+                                <span *ngIf="order.order.type === orderEnum.Cash_Sale" style="border-radius: 2px" class="label label-primary">Cash Sale</span>
                                 <span *ngIf="order.order.type === orderEnum.Charity" style="border-radius: 2px" class="label label-success">Charity</span>
-                                <span *ngIf="order.order.type === orderEnum.Sample" style="border-radius: 2px" class="label label-info">Sample</span>
+                                <span *ngIf="order.order.type === orderEnum.Sample" style="border-radius: 2px" class="label label-default">Sample</span>
                                 <span *ngIf="order.order.type === orderEnum.Waste" style="border-radius: 2px" class="label label-danger">Waste</span>
                             </td>
                             <td>
