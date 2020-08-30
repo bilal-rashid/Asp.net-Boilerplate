@@ -6,6 +6,7 @@ namespace Dairy.Dairy.Utilities
         Normal = 1,
         Sample = 2,
         Waste = 3,
-        Charity = 4
+        Charity = 4,
+        Cash_Sale = 5
     }
 }
