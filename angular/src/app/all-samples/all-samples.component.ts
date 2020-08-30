@@ -14,6 +14,7 @@ import {ActivatedRoute} from '@node_modules/@angular/router';
 import {MatDialog} from '@node_modules/@angular/material';
 import {finalize} from '@node_modules/rxjs/operators';
 import * as moment from '@node_modules/moment';
+import {MatSnackBar} from '@node_modules/@angular/material/snack-bar';
 class GetOrdersRequestDto extends PagedRequestDto {
     keyword: string;
     sorting: string;
@@ -46,6 +47,7 @@ export class AllSamplesComponent extends PagedListingComponentBase<GetOrderForVi
         private _customerService: CustomerServiceProxy,
         private _userService: UserServiceProxy,
         private route: ActivatedRoute,
+        private _snackBar: MatSnackBar,
         private _dialog: MatDialog
     ) {
         super(injector);
@@ -169,6 +171,11 @@ export class AllSamplesComponent extends PagedListingComponentBase<GetOrderForVi
             (rv[x[key]] = rv[x[key]] || []).push(x);
             return rv;
         }, {});
-    };
+    }
+    showSnackbar(text) {
+        this._snackBar.open(text, null, {
+            duration: 2000,
+        });
+    }
 
 }

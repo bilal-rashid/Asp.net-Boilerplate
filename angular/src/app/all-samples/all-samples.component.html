@@ -19,7 +19,7 @@
             </div>
             <div style="padding:5px" class="row clearfix">
                 <div *ngFor="let product of Stats; let i = index" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div *ngIf="(i+1) % 2 === 0" class="info-box bg-cyan hover-expand-effect">
+                    <div  (click)="showSnackbar('Total Price: ' + product.totalPrice + ' PKR')" *ngIf="(i+1) % 2 === 0" class="info-box bg-cyan hover-expand-effect">
                         <div class="icon">
                             <i class="material-icons">info</i>
                         </div>
@@ -28,7 +28,7 @@
                             <div class="text">{{product.totalQty + ' ' + product.unit}}</div>
                         </div>
                     </div>
-                    <div *ngIf="(i+1) % 2 !== 0" class="info-box bg-light-green hover-expand-effect">
+                    <div (click)="showSnackbar('Total Price: ' + product.totalPrice + ' PKR')" *ngIf="(i+1) % 2 !== 0" class="info-box bg-light-green hover-expand-effect">
                         <div class="icon">
                             <i class="material-icons">info</i>
                         </div>
