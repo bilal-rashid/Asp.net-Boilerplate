@@ -6,5 +6,7 @@ namespace Dairy.Configuration
     public interface IConfigurationAppService
     {
         Task ChangeUiTheme(ChangeUiThemeInput input);
+        Task ChangeMarketingLine(string input);
+        Task ChangeFooter(string input);
     }
 }

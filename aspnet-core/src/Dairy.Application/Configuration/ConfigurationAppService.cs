@@ -12,5 +12,13 @@ namespace Dairy.Configuration
         {
             await SettingManager.ChangeSettingForUserAsync(AbpSession.ToUserIdentifier(), AppSettingNames.UiTheme, input.Theme);
         }
+        public async Task ChangeMarketingLine(string input)
+        {
+            await SettingManager.ChangeSettingForApplicationAsync(AppSettingNames.Marketing, input);
+        }
+        public async Task ChangeFooter(string input)
+        {
+            await SettingManager.ChangeSettingForApplicationAsync(AppSettingNames.Footer, input);
+        }
     }
 }
