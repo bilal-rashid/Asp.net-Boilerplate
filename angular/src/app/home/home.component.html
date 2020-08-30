@@ -10,7 +10,7 @@
                     <mat-form-field>
                         <mat-select [placeholder]="l('Customer')" [(ngModel)]="customerId"  name="isActive">
                             <mat-option *ngFor="let customer of customers"
-                                        [value]="customer.id">{{customer.name}}</mat-option>
+                                        [value]="customer.id">{{customer.name}} <span *ngIf="customer.description">{{' - '+customer.description}}</span> </mat-option>
 
                             <!--   <mat-option value="">{{ 'All' | localize }}</mat-option>
                                <mat-option value="true">{{ 'Yes' | localize }}</mat-option>
@@ -40,7 +40,7 @@
                 <div class="content">
                     <div class="text">{{ product['quantity1'] | number:  '1.2-2'}}{{'  ' + product.unit}}</div>
                     <div style="font-size: 18px" class="number count-to">
-                        {{product.name}}
+                        {{product.name}} <span *ngIf="product.description">{{' - '+ product.description}}</span>
                     </div>
 
                 </div>

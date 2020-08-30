@@ -114,7 +114,7 @@ namespace Dairy.Dairy.Orders
 
         public async Task<PagedResultDto<GetOrderForViewDto>> GetAllOther(GetAllOrdersInputDto input)
         {
-            var orders = _orderRepository.GetAll().Where(p => p.Type == OrderType.Charity || p.Type == OrderType.Sample || p.Type == OrderType.Waste)
+            var orders = _orderRepository.GetAll().Where(p => p.Type == OrderType.Charity || p.Type == OrderType.Cash_Sale || p.Type == OrderType.Sample || p.Type == OrderType.Waste)
                 .WhereIf(input.UserId != null, e => e.User.Id == input.UserId)
                 .WhereIf(input.Type != null, e => e.Type == input.Type)
                 .WhereIf(input.StartDate != null && input.EndDate != null, e => e.CreationTime >= input.StartDate
