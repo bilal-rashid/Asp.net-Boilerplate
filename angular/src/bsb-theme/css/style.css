@@ -37,7 +37,7 @@ a{cursor: pointer;
     display: inline-block; }
   .ngx-pagination a,
   .ngx-pagination button {
-    color: #0a0a0a; 
+    color: #0a0a0a;
     display: block;
     padding: 0.1875rem 0.625rem;
     border-radius: 0; }
@@ -52,7 +52,7 @@ a{cursor: pointer;
   .ngx-pagination .disabled {
     padding: 0.1875rem 0.625rem;
     color: #cacaca;
-    cursor: default; } 
+    cursor: default; }
     .ngx-pagination .disabled:hover {
       background: transparent; }
   .ngx-pagination .ellipsis::after {
@@ -61,7 +61,7 @@ a{cursor: pointer;
     color: #0a0a0a; }
 
 .ngx-pagination .pagination-previous a::before,
-.ngx-pagination .pagination-previous.disabled::before { 
+.ngx-pagination .pagination-previous.disabled::before {
   content: '«';
   display: inline-block;
   margin-right: 0.5rem; }
@@ -7794,7 +7794,7 @@ fieldset[disabled] .form-control {
 
 /* Login Page ================================== */
 .login-page {
-  background-color: #00BCD4;
+  background-color: #ce653c;
   padding-left: 0;
   max-width: 360px;
   margin: 5% auto;
@@ -7806,7 +7806,7 @@ fieldset[disabled] .form-control {
   .login-page .login-box a {
     font-size: 14px;
     text-decoration: none;
-    color: #00BCD4; }
+    color: #ce653c; }
   .login-page .login-box .logo {
     margin-bottom: 20px; }
     .login-page .login-box .logo a {
