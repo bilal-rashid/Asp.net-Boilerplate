@@ -21,8 +21,11 @@ import { ModalModule } from 'ngx-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
 import { GestureConfig } from '@angular/material';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from './environments/environment';
 
 import * as _ from 'lodash';
+import {AngularFireDatabaseModule} from '@node_modules/@angular/fire/database';
 
 export function appInitializerFactory(injector: Injector,
     platformLocation: PlatformLocation) {
@@ -100,7 +103,9 @@ export function getCurrentLanguage(): string {
         AbpModule,
         ServiceProxyModule,
         RootRoutingModule,
-        HttpClientModule
+        AngularFireDatabaseModule,
+        HttpClientModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig)
     ],
     declarations: [
         RootComponent
