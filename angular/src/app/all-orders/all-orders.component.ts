@@ -171,7 +171,7 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
             });
         });
         this.GroupedData = this.groupBy(this.Data, 'product');
-        this.generatePdf('open', totalBill, customerResult);
+        this.generatePdf('download', totalBill, customerResult);
         // let billDialog;
         // billDialog = this._dialog.open(CustomerBillDialogComponent, {
         //     data: {orders: orders,
@@ -507,7 +507,8 @@ export class AllOrdersComponent extends PagedListingComponentBase<GetOrderForVie
         return array;
 
     }
-    generatePdf(action = 'open',  totalBill:number, customerResult: CustomerDto) {
+    generatePdf(action = 'download',  totalBill:number, customerResult: CustomerDto) {
+        console.log(action);
         const documentDefinition = this.docDefinition(totalBill, customerResult);
         switch (action) {
             case 'open': pdfMake.createPdf(documentDefinition).open(); break;
