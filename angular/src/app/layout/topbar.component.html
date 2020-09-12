@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
-            <a href="javascript:void(0);" class="bars"></a>
+            <a *ngIf="isAdmin" href="javascript:void(0);" class="bars"></a>
             <a routerLink="/app/home" class="navbar-brand"><i class="fa fa-cubes"></i> Balai Farms</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">

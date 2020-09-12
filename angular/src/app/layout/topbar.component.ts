@@ -8,9 +8,11 @@ import { AppComponentBase } from '@shared/app-component-base';
 })
 export class TopBarComponent extends AppComponentBase {
 
+    isAdmin: boolean;
     constructor(
         injector: Injector
     ) {
         super(injector);
+        this.isAdmin = this.permission.isGranted('Pages.Customers.Bills');
     }
 }
