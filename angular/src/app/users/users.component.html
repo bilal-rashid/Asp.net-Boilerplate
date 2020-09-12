@@ -49,6 +49,7 @@
                             <th>{{ "UserName" | localize }}</th>
                             <th>{{ "FullName" | localize }}</th>
                             <th>{{ "EmailAddress" | localize }}</th>
+                            <th>{{ "Role" | localize }}</th>
                             <th>
                                 <div style="text-align:center">{{ "IsActive" | localize }}</div>
                             </th>
@@ -69,6 +70,7 @@
                             <td>{{ user.userName }}</td>
                             <td>{{ user.fullName }}</td>
                             <td>{{ user.emailAddress }}</td>
+                            <td>{{ user.roleNames[0].toLowerCase() }}</td>
                             <td align="center">
                                 <i class="material-icons check_box" *ngIf="user.isActive">
                                     check_box
