@@ -76,6 +76,7 @@
                     <tr>
                         <th>Customer</th>
                         <th>Date</th>
+                        <th>Time</th>
                         <th>
                            Order Total(PKR)
                         </th>
@@ -96,6 +97,7 @@
                         <tr>
                             <td>{{ order.order.customerName }}</td>
                             <td>{{ order.order.creationTime | date}}</td>
+                            <td>{{ order.order.creationTime  | date:'shortTime': 'GMT +10'}}</td>
                             <td>{{ order.order.totalPrice.toString().replace('/\B(?=(\d{3})+(?!\d))/g', ",") }}</td>
                             <td>
                                 <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
