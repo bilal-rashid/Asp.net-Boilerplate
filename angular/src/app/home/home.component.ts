@@ -98,6 +98,12 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
     logSample() {
         this._router.navigate(['app/sample']);
     }
+    getCustomerArea(): string {
+        return this.customers.find(p => p.id === this.customerId).area;
+    }
+    callCustomer() {
+        window.open('tel:'+ this.customers.find(p => p.id === this.customerId).primaryContact, '_self');
+    }
     confirmAndCreate(): void {
         abp.message.confirm(
             'Create order for Customer: ' + this.customers.find( p => p.id === this.customerId).name,
@@ -160,6 +166,15 @@ export class HomeComponent extends AppComponentBase implements AfterViewInit {
                 let itemIndex = this.routeCustomers.indexOf(this.customerId);
                 this.routeCustomers.splice(itemIndex, 1);
                 this.saveRouteData();
+            } else {
+                if (this.routeCustomers.length > 0) {
+                    this.customerId = this.routeCustomers[0];
+                } else {
+                    abp.message.success(
+                        'Route has been Completed',
+                        undefined,
+                    );
+                }
             }
         }
     }
